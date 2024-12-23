@@ -1,3 +1,8 @@
+# Project File Structure
+
+**Frontend/Backend Combined**
+
+```plaintext
 project-root/
 ├── frontend/                  # Frontend code
 │   ├── public/                # Static assets (e.g., images, fonts)
