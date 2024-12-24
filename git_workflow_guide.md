@@ -72,6 +72,18 @@ git push origin <your-branch-name>
 
 ---
 
+## Regular Updates
+To keep your branch up-to-date with the latest changes from `main`:
+
+1. Fetch the latest updates:
+   ```bash
+   git fetch origin
+   ```
+2. Merge the updates from main:
+   ```bash
+   git pull origin main
+   ```   
+
 ## Notes
 - Always write meaningful commit messages that describe the changes you made.
 - Ensure you are on the correct branch before pushing or merging code.
