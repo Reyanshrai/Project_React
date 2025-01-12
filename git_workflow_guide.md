@@ -89,6 +89,9 @@ To keep your branch up-to-date with the latest changes from `main`:
 - Ensure you are on the correct branch before pushing or merging code.
 - Use `git status` frequently to check the current state of your repository.
 
+## Latest Commit Command
+- git log -n 2 --pretty=format:"%h - %s (%an, %ar)" > recent_commits.txt
+
 ---
 
 This document provides a clear and structured guide for working with Git in a collaborative environment. Let me know if you need further clarification!
