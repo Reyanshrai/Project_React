@@ -1,9 +1,18 @@
-import React from 'react'
-import Home from './pages/home'
+import {Routes,Route} from 'react-router-dom'
+import {Home,About,Login, Register} from './pages'
 
 const App = () => {
   return (
-    <Home></Home>
+    <>
+      <div>
+        <Routes>
+          <Route path='/' element={<Home></Home>}></Route>
+          <Route path='/about' element={<About></About>}></Route>
+          <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/register' element={<Register></Register>}></Route>
+        </Routes>
+      </div>
+    </>
   )
 }
 

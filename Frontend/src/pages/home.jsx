@@ -1,9 +1,9 @@
-import React from "react";
-import {navbar,about,} from "../../../../../components/index.js"
+import {Navbar,Footer} from '../components'
 
 const home = () => {
   return (
     <>
+      <Navbar></Navbar>
       <div
         id="default-carousel"
         className="relative w-full"
@@ -104,13 +104,13 @@ const home = () => {
               fill="none"
               viewBox="0 0 6 10"
             >
-              <path
+              {/* <path
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="M5 1 1 5l4 4"
-              />
+              /> */}
             </svg>
             <span className="sr-only">Previous</span>
           </span>
@@ -128,18 +128,19 @@ const home = () => {
               fill="none"
               viewBox="0 0 6 10"
             >
-              <path
+              {/* <path
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="m1 9 4-4-4-4"
-              />
+              /> */}
             </svg>
             <span className="sr-only">Next</span>
           </span>
         </button>
       </div>
+      <Footer></Footer>
     </>
   );
 };
