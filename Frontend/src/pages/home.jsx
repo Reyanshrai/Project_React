@@ -1,5 +1,5 @@
-import React from 'react';
-import { Navbar, Footer,Carousoul } from "../components";
+
+import { Navbar, Footer,} from "../components";
 
 const Home = () => {
   return (
