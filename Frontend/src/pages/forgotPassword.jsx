@@ -20,7 +20,7 @@ const ForgotPassword = () => {
       <Navbar />
       <div
         className="flex-grow flex items-center justify-center bg-cover bg-center bg-gray-100 dark:bg-gray-900 pt-20" style={{
-          backgroundImage: "url('./images/image 7.png')",
+          backgroundImage: "url('./images/registerbg.png')",
         }}
       >
         <div
