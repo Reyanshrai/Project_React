@@ -102,3 +102,5 @@ Frontend/
 - Frontend: React with Vite
 - Styling: Tailwind CSS
 - Code Quality: ESLint
+
+Something changes
