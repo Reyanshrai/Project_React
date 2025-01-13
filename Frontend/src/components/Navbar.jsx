@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
 
+=======
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+>>>>>>> 1893ec31cadd241443cf85876891c82abfe97e8a
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
