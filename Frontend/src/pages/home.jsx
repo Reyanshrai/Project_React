@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Navbar, Footer,Carousoul } from "../components";
 
 const Home = () => {
