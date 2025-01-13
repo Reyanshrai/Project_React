@@ -77,7 +77,7 @@ const Login = () => {
                 required
               />
               <Link
-                to="/ForgotPassword"
+                to="/forgotpassword"
                 className="text-sm text-blue-600 hover:underline dark:text-blue-400 mt-2 block"
               >
                 Forgot Password?
@@ -96,7 +96,7 @@ const Login = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Don’t have an account?{' '}
                 <Link
-                  to="/Register"
+                  to="/register"
                   className="text-blue-600 hover:underline dark:text-blue-400"
                 >
                   Go To Sign UP
