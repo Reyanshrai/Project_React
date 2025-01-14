@@ -1,6 +1,6 @@
 
 import { Navbar, Footer,Carousoul} from "../components";
-import {Contact,Timetable} from  './index';
+import {About, Contact,Timetable} from  './index';
  
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <Navbar></Navbar>
       <Carousoul></Carousoul>
-      
+      <About/>
       <Timetable/>
       <Contact/>
       <Footer></Footer>
