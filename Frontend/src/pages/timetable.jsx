@@ -108,7 +108,7 @@ const Timetable = () => {
           </table>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
