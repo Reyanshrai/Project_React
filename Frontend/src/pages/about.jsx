@@ -1,13 +1,14 @@
-import React from 'react'
-import { Navbar,Footer } from "../components";
+import React from 'react';
+import { Navbar, Footer,} from "../components";
 
-const about = () => {
+
+const About = () => {
   return (
     <>
       <Navbar/>
-     
       <Footer/>
     </>
   )
 }
-export default about;
+
+export default About;
