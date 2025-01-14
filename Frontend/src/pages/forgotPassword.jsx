@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
+import {Navbar,Footer} from '../components'
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const ForgotPassword = () => {

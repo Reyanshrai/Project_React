@@ -35,7 +35,7 @@ const Navbar = () => {
             <h2 className="text-[#F50B0B] text-2xl md:text-3xl font-semibold">
               GYM..
               <br />
-              <span className="text-sm md:text-base dark:text-[#F50B0B]">
+              <span className="text-sm md:text-base dark:text-[#ffffff] ">
                 FITNESS FOR ALL
               </span>
             </h2>
