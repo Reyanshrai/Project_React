@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +10,7 @@ const Navbar = () => {
   };
 
   const handleGetStarted = () => {
-    navigate("/register")
+    navigate("/register");
   };
 
   return (
@@ -36,7 +35,7 @@ const Navbar = () => {
             <h2 className="text-[#F50B0B] text-2xl md:text-3xl font-semibold">
               GYM..
               <br />
-              <span className="text-sm md:text-base dark:text-[#F50B0B]">
+              <span className="text-sm md:text-base dark:text-[#ffffff] ">
                 FITNESS FOR ALL
               </span>
             </h2>
@@ -45,7 +44,7 @@ const Navbar = () => {
           {/* Get Started Button and Mobile Menu Toggle */}
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button
-            onClick={handleGetStarted}
+              onClick={handleGetStarted}
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
@@ -110,5 +109,4 @@ const Navbar = () => {
     </div>
   );
 };
-
 export default Navbar;

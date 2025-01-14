@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-const Carosoul = () => {
+const Carousel = () => {
   const slides = [
     {
       id: 1,
-      src: "/images/slide2.jpg",
+      src: "/images/slide1.jpg",
       heading: "GET YOUR BODY IN SHAPE",
       subheading: "BEST FITNESS STUDIO",
     },
     {
       id: 2,
-      src: "/images/slide1.jpg",
+      src: "/images/slide2.jpg",
       heading: "UNLEASH YOUR POTENTIAL",
       subheading: "TRAIN WITH THE BEST",
     },
@@ -37,8 +37,8 @@ const Carosoul = () => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg md:h-96">
-      {/* Slide */}
+    <div className="relative overflow-hidden rounded-lg h-[400px] md:h-[600px]">
+      {/* Slides */}
       <div
         className="flex transition-transform duration-700"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -46,16 +46,20 @@ const Carosoul = () => {
         {slides.map((slide) => (
           <div
             key={slide.id}
-            className="min-w-full h-64 relative flex-shrink-0"
+            className="min-w-full relative flex-shrink-0 h-full"
           >
             <img
               src={slide.src}
               alt={slide.heading}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover "
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white">
-              <h2 className="text-xl uppercase">{slide.heading}</h2>
-              <h1 className="text-4xl font-bold">{slide.subheading}</h1>
+            <div className="absolute bottom-8 left-8">
+              <h2 className="text-sm uppercase text-white">
+                {slide.heading}
+              </h2>
+              <h1 className="text-2xl font-bold text-white border-b-4 border-red-500 inline-block mb-2">
+                {slide.subheading}
+              </h1>
             </div>
           </div>
         ))}
@@ -76,7 +80,7 @@ const Carosoul = () => {
       </button>
 
       {/* Dots Indicator */}
-      <div className="flex justify-center space-x-2 mt-4">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -91,4 +95,4 @@ const Carosoul = () => {
   );
 };
 
-export default Carosoul;
+export default Carousel;
