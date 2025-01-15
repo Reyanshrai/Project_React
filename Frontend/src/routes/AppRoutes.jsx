@@ -24,13 +24,11 @@ const AppRoutes = () => (
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-<<<<<<< HEAD
-        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
-=======
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="*" element={<NotFound />}></Route>
->>>>>>> 850f463f69dc5a806773e5d1918391fba87bf13e
+        
+
     </Routes>
-);
+);      
 
 export default AppRoutes;
