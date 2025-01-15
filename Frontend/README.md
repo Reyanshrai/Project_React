@@ -123,4 +123,4 @@ npm run dev
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
-Built with ❤️ by [React Team](https://github.com/Reyanshrai/Project_React)
+Built with ❤️ by React Team - [Reyanshrai](https://github.com/Reyanshrai/Project_React) • [Vivek Kumar](https://github.com/vsah7079) • [Himanshu Kumar](https://github.com/himanshu-kumar-911)
