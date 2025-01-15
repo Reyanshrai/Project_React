@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {Navbar,Footer} from '../components'
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 

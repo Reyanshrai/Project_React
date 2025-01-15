@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { Link } from "react-router-dom";
@@ -77,7 +77,7 @@ const Login = () => {
                 required
               />
               <Link
-                to="/forgotpassword"
+                to="/forgot-password"
                 className="text-sm text-blue-600 hover:underline dark:text-blue-400 mt-2 block"
               >
                 Forgot Password?
