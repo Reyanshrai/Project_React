@@ -23,7 +23,7 @@ const AppRoutes = () => (
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
     </Routes>
 );
 
