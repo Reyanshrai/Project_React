@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const validator = require('express-validator');
-const bcrypt = require('bcrypt');
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -50,12 +51,18 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+
+
 userSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateToken = function () {
-    return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+userSchema.methods.generateToken = function() {
+    return jwt.sign(
+        { id: this._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '30d' }
+    );
 };
 
 const User = mongoose.model('User', userSchema);
