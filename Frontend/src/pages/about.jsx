@@ -1,5 +1,5 @@
-import React from "react";
-import { Navbar, } from "../components";
+import { Navbar } from "../components";
+import { FaUsers, FaUserTie, FaHeart, FaDumbbell } from "react-icons/fa";
 
 const About = () => {
   return (
@@ -19,12 +19,12 @@ const About = () => {
               <img
                 src="/images/aboutimg2.png"
                 alt="Fitness 2"
-                className="rounded-md w-2/3 h-200px object-cover shadow-lg absolute bottom-0 right-0  transform translate-x-6 translate-y-6"
+                className="rounded-md w-2/3 h-200px object-cover shadow-lg absolute bottom-0 right-0  transform translate-x-14 translate-y-14"
               />
             </div>
 
             {/* Right Section - Content */}
-            <div className="space-y-4">
+            <div className="space-y-6 mx-20">
               <h2 className="text-3xl font-bold text-gray-800">#2 About Us</h2>
               <p className="text-xl text-gray-700">
                 The fitness you will enjoy with our{" "}
@@ -61,27 +61,30 @@ const About = () => {
           </div>
 
           {/* Statistics Section */}
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center bg-white p-6 rounded-md shadow">
-            <div>
+          <div className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-4 text-center bg-white p-6 rounded-md shadow">
+            <div className="flex flex-col items-center">
+              <FaUsers className="text-red-500 text-4xl mb-2" />
               <p className="text-2xl font-bold text-red-500">1000+</p>
               <p className="text-gray-700">Happy Customers</p>
             </div>
-            <div>
+            <div className="flex flex-col items-center">
+              <FaUserTie className="text-red-500 text-4xl mb-2" />
               <p className="text-2xl font-bold text-red-500">10+</p>
               <p className="text-gray-700">Personal Trainer</p>
             </div>
-            <div>
+            <div className="flex flex-col items-center">
+              <FaHeart className="text-red-500 text-4xl mb-2" />
               <p className="text-2xl font-bold text-red-500">124+</p>
               <p className="text-gray-700">Communities</p>
             </div>
-            <div>
+            <div className="flex flex-col items-center">
+              <FaDumbbell className="text-red-500 text-4xl mb-2" />{" "}
               <p className="text-2xl font-bold text-red-500">180+</p>
               <p className="text-gray-700">Equipment</p>
             </div>
           </div>
         </div>
       </div>
-     
     </>
   );
 };

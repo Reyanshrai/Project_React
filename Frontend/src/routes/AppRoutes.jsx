@@ -26,7 +26,9 @@ const AppRoutes = () => (
         <Route path="/register" element={<Register />}></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="*" element={<NotFound />}></Route>
+        
+
     </Routes>
-);
+);      
 
 export default AppRoutes;
