@@ -47,8 +47,8 @@ const About = () => {
                   <span className="text-red-500 mr-2">✔</span> Sed semper
                   blandit euismod fusce mauris
                 </li>
-                <li className="flex items-center">
-                  <span className="text-red-500 mr-2">✔</span> Aenean
+                <li className="flex items-center ">
+                  <span className="text-red-500 mr-2 ">✔</span> Aenean
                   sollicitudin magna vel efficitur
                 </li>
               </ul>
