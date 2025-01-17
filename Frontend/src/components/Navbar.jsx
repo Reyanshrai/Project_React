@@ -19,7 +19,8 @@ const Navbar = () => {
         className="bg-white
        dark:bg-gray-900 fixed w-full
         z-20 top-0 border-b border-gray-200 
-        dark:border-gray-600 "
+        dark:border-gray-600 
+        "
       >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* Logo and Title */}
@@ -35,7 +36,7 @@ const Navbar = () => {
             <h2 className="text-[#F50B0B] text-2xl md:text-3xl font-semibold">
               GYM..
               <br />
-              <span className="text-sm md:text-base dark:text-[#ffffff] ">
+              <span className="text-sm md:text-base dark:text-[#ffffff] absolute ">
                 FITNESS FOR ALL
               </span>
             </h2>
@@ -46,7 +47,7 @@ const Navbar = () => {
             <button
               onClick={handleGetStarted}
               type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
             >
               Get Started
             </button>
