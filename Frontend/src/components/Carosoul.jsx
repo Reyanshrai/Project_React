@@ -37,7 +37,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg h-[400px] md:h-[600px]">
+    <div className="relative overflow-hidden rounded-lg h-[400px] md:h-[600px] mt-20">
       {/* Slides */}
       <div
         className="flex transition-transform duration-700"
