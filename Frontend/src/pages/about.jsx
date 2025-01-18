@@ -5,7 +5,7 @@ const About = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 p-6">
+      <div className="bg-gray-100 p-6 mt-14">
         <div className="max-w-7xl mx-auto">
           {/* About Us Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -47,8 +47,8 @@ const About = () => {
                   <span className="text-red-500 mr-2">✔</span> Sed semper
                   blandit euismod fusce mauris
                 </li>
-                <li className="flex items-center">
-                  <span className="text-red-500 mr-2">✔</span> Aenean
+                <li className="flex items-center ">
+                  <span className="text-red-500 mr-2 ">✔</span> Aenean
                   sollicitudin magna vel efficitur
                 </li>
               </ul>

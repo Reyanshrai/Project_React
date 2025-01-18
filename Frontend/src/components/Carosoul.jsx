@@ -37,7 +37,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg h-[400px] md:h-[600px]">
+    <div className="relative overflow-hidden rounded-lg h-[400px] md:h-[600px] mt-20">
       {/* Slides */}
       <div
         className="flex transition-transform duration-700"
@@ -53,8 +53,8 @@ const Carousel = () => {
               alt={slide.heading}
               className="w-full h-full object-cover "
             />
-            <div className="absolute bottom-8 left-8">
-              <h2 className="text-sm uppercase text-white">
+            <div className="absolute bottom-10 left-8">
+              <h2 className="text-sm uppercase text-white absolute top-20  ">
                 {slide.heading}
               </h2>
               <h1 className="text-2xl font-bold text-white border-b-4 border-red-500 inline-block mb-2">
