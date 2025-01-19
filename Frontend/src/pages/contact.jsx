@@ -4,7 +4,7 @@ import { Navbar, Footer } from "../components";
 const contact = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="bg-gray-100 min-h-screen flex items-center justify-center">
         <div className="container mx-auto p-4">
           {/* Layout */}
