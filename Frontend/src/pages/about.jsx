@@ -4,7 +4,7 @@ import { FaUsers, FaUserTie, FaHeart, FaDumbbell } from "react-icons/fa";
 const About = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="bg-gray-100 p-6 mt-14">
         <div className="max-w-7xl mx-auto">
           {/* About Us Section */}
