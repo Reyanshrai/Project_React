@@ -1,5 +1,4 @@
 import { useState } from "react";
-import {Navbar,Footer} from '../components'
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const ForgotPassword = () => {
@@ -77,7 +76,7 @@ const ForgotPassword = () => {
           </form>
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };
