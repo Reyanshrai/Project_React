@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Navbar } from "../components";
 import {
   Home,
   About,
@@ -10,25 +11,29 @@ import {
   Login,
   Register,
   ForgotPassword,
-  NotFound
+  NotFound,
 } from "../pages";
 
-const AppRoutes = () => (
-    <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/services" element={<Services />}></Route>
-        <Route path="/timetable" element={<Timetable />}></Route>
-        <Route path="/trainer" element={<Trainer />}></Route>
-        <Route path="/pricing" element={<Pricing />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-        
-
-    </Routes>
-);      
+const AppRoutes = () => {
+  return (
+    <>
+      <Navbar />
+      {/* Define your routes here */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/timetable" element={<Timetable />} />
+        <Route path="/trainer" element={<Trainer />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
 
 export default AppRoutes;
