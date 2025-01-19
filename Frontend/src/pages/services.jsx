@@ -4,8 +4,8 @@ import { Navbar,Footer } from '../components';
 const services = () => {
   return (
     <>
-    <Navbar/>
-    <Footer/>
+    {/* <Navbar/>
+    <Footer/> */}
     </>
   )
 }

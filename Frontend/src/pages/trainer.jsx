@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Footer } from "../components";
+// import { Navbar, Footer } from "../components";
 
 const trainerData = [
   {
@@ -22,7 +22,7 @@ const trainerData = [
 const trainer = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="bg-gray-100 p-6 mt-20">
         <div className="max-w-7xl mx-auto text-center">
           {/* Header Section */}

@@ -4,8 +4,8 @@ import { Navbar, Footer } from "../components";
 const pricing = () => {
   return (
     <>
-    <Navbar/>
-    <Footer/>
+    {/* <Navbar/> */}
+    {/* <Footer/> */}
     </>
   )
 }
