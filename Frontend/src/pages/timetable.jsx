@@ -77,7 +77,7 @@ const Timetable = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="p-8 bg-gray-50 mt-20">
         <h1 className="text-center text-2xl font-bold text-red-600 mb-4">
           #04 Timetable
