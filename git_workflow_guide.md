@@ -90,7 +90,14 @@ To keep your branch up-to-date with the latest changes from `main`:
 - Use `git status` frequently to check the current state of your repository.
 
 ## Latest Commit Command
-- git log -n 2 --pretty=format:"%h - %s (%an, %ar)" > recent_commits.txt
+   ```bash 
+      git log -n 2 --pretty=format:"%h - %s (%an, %ar)" > recent_commits.txt
+   ```
+
+## If you want to check the total commits for a specific branch:
+   ```bash
+      git rev-list --count <branch name>
+   ```
 
 ---
 
