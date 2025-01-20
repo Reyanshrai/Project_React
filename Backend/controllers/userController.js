@@ -1,18 +1,19 @@
 import asyncHandler from 'express-async-handler';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import { validationResult } from 'express-validator';
+import {StatusCodes} from 'http-status-codes'
 
 
 
 // @desc    Register new user
 // @route   POST /api/users/register
 // @access  Public
-export const registerUser = asyncHandler(async (req, res) => {
+export const registerUser = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(400);
+        res.status(StatusCodes.BAD_REQUEST);
         throw new Error(errors.array()[0].msg);
     }
 
@@ -20,7 +21,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-        res.status(400);
+        res.status(StatusCodes.userExists);
         throw new Error('User already exists');
     }
 
@@ -36,7 +37,10 @@ export const registerUser = asyncHandler(async (req, res) => {
         gender
     });
 
-    const token = await user.generateToken();
+    console.log("user",user)
+
+    const token = await User.generateToken();
+
     res.cookie('jwt', token, {
         httpOnly: true,
         secure: true,
@@ -45,7 +49,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
-        res.status(201).json({
+        res.status(StatusCodes.CREATED).json({
             _id: user._id,
             firstname: user.firstname,
             lastname: user.lastname,
@@ -53,20 +57,20 @@ export const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id),
         });
     } else {
-        res.status(400);
+        res.status(StatusCodes.BAD_REQUEST);
         throw new Error('Invalid user data');
     }
 
     
-});
+}   ;
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
-export const loginUser = asyncHandler(async (req, res) => {
+export const loginUser = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(400);
+        res.status(StatusCodes.BAD_REQUEST);
         throw new Error(errors.array()[0].msg);
     }
 
@@ -82,10 +86,10 @@ export const loginUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id),
         });
     } else {
-        res.status(401);
+        res.status(StatusCodes.BAD_REQUEST);
         throw new Error('Invalid email or password');
     }
-});
+};
 
 // @desc    Logout user / clear cookie
 // @route   GET /api/users/logout
@@ -95,7 +99,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         expires: new Date(0),
     });
-    res.status(200).json({ message: 'Logged out successfully' });
+    res.status(StatusCodes.ACCEPTED).json({ message: 'Logged out successfully' });
 });
 
 // @desc    Get user profile
@@ -114,7 +118,7 @@ export const getUserProfile = asyncHandler(async (req, res) => {
             gender: user.gender,
         });
     } else {
-        res.status(404);
+        res.status(StatusCodes.NOT_FOUND);
         throw new Error('User not found');
     }
 });
@@ -132,11 +136,11 @@ export const updatePassword = asyncHandler(async (req, res) => {
             
             res.json({ message: 'Password updated successfully' });
         } else {
-            res.status(400);
+            res.status(StatusCodes.BAD_REQUEST);
             throw new Error('Please provide new password');
         }
     } else {
-        res.status(404);
+        res.status(StatusCodes.NOT_FOUND);
         throw new Error('User not found');
     }
 });
