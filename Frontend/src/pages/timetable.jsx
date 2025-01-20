@@ -79,7 +79,7 @@ const Timetable = () => {
     <>
       {/* <Navbar /> */}
       <div className="p-8 bg-gray-50 mt-20">
-        <h1 className="text-center text-2xl font-bold text-red-600 mb-4">
+        <h1 className="text-center text-2xl font-bold text-red-600 mb-4 ">
           #04 Timetable
         </h1>
         <h2 className="text-center text-xl font-semibold mb-6">
@@ -90,12 +90,12 @@ const Timetable = () => {
           <table className="table-auto w-full border border-gray-300 text-left text-sm">
             <thead className="bg-red-500 text-white">
               <tr>
-                <th className="p-3 border text-center">Routine</th>
-                <th className="p-3 border text-center">10 am</th>
-                <th className="p-3 border text-center">11 am</th>
-                <th className="p-3 border text-center">03 pm</th>
-                <th className="p-3 border text-center">05 pm</th>
-                <th className="p-3 border text-center">07 pm</th>
+                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">Routine</th>
+                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">10 am</th>
+                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">11 am</th>
+                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">03 pm</th>
+                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">05 pm</th>
+                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">07 pm</th>
               </tr>
             </thead>
             <tbody>
@@ -104,13 +104,13 @@ const Timetable = () => {
                   key={index}
                   className={index % 2 === 0 ? "bg-gray-100" : "bg-white text-center"}
                 >
-                  <td className="border p-3 font-semibold text-gray-700">
+                  <td className="border p-3 font-semibold text-gray-700 hover:scale-105 transition-all duration-700">
                     {row.day}
                   </td>
                   {row.sessions.map((session, i) => (
                     <td
                       key={i}
-                      className="border p-3 whitespace-pre-wrap text-gray-700 text-center"
+                      className="border p-3 whitespace-pre-wrap text-gray-700 text-center hover:scale-105 transition-all duration-700"
                     >
                       {session || "—"}
                     </td>
