@@ -3,9 +3,16 @@ import React from "react";
 const Pricing = () => {
   return (
     <>
-      <div>
+      <div className="p-8 bg-gray-50 mt-20">
+        <h1 className="text-center text-2xl font-bold text-red-600 mb-4 ">
+          #06 Pricing
+        </h1>
+        <h2 className="text-center text-xl font-semibold mb-6">
+          The foremost source and cheap{" "}
+          <span className="text-red-500">#Pricing</span>
+        </h2>
         <div
-          className="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-8 dark:border-gray-700 mt-20 py-10 ml-20 gap-10"
+          className="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-8 dark:border-gray-700 mt-20 py-10 ml-20 gap-10 hover:scale-105 transition-all duration-700"
           style={{
             backgroundImage: "url('images/plan.png')", // Replace with your image URL
             backgroundSize: "cover",
@@ -24,21 +31,21 @@ const Pricing = () => {
           </div>
 
           <ul role="list" className="space-y-5 my-7">
-            <li className="flex items-center text-white text-xl">
+            <li className="flex items-center justify-center text-white text-xl">
               <span className="mr-2 text-white-500">•</span> Unlimited access to
               the GYM
             </li>
-            <li className="flex items-center text-white text-xl">
+            <li className="flex items-center justify-center text-white text-xl">
               <span className="mr-2 text-white-500">•</span> FREE drinking
               package
             </li>
-            <li className="flex items-center text-white text-xl">
+            <li className="flex items-center justify-center text-white text-xl">
               <span className="mr-2 text-white-500">•</span> One year membership
             </li>
-            <li className="flex items-center text-white text-xl">
+            <li className="flex items-center justify-center text-white text-xl">
               <span className="mr-2 text-white-500">•</span> 3 classes per week
             </li>
-            <li className="flex items-center text-white text-xl">
+            <li className="flex items-center justify-center text-white text-xl">
               <span className="mr-2 text-white-500">•</span> 1 Free personal
               training
             </li>
