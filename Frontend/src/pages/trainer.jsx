@@ -33,7 +33,7 @@ const trainer = () => {
           </p>
 
           {/* Trainers Section */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 ">
             {trainerData.map((trainer, index) => (
               <div
                 key={index}
@@ -43,7 +43,7 @@ const trainer = () => {
                 <img
                   src={trainer.image}
                   alt={trainer.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover  hover:scale-105 transition-all duration-700"
                 />
 
                 {/* Trainer Details */}
