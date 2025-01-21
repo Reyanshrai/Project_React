@@ -1,4 +1,4 @@
-;
+
 import { Activity, Calendar, Heart, TrendingUp, Weight, Timer, Target } from 'lucide-react';
 
 const FitnessDashboard = () => {
