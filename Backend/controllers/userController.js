@@ -1,10 +1,16 @@
 import asyncHandler from 'express-async-handler';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import { validationResult } from 'express-validator';
+import { StatusCodes } from 'http-status-codes';
 
-
+// Utility function to generate JWT token
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '1d',
+    });
+};
 
 // @desc    Register new user
 // @route   POST /api/users/register
@@ -12,7 +18,7 @@ import { validationResult } from 'express-validator';
 export const registerUser = asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(400);
+        res.status(StatusCodes.BAD_REQUEST);
         throw new Error(errors.array()[0].msg);
     }
 
@@ -20,7 +26,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-        res.status(400);
+        res.status(StatusCodes.CONFLICT); // Use CONFLICT (409) for duplicate resources
         throw new Error('User already exists');
     }
 
@@ -33,31 +39,25 @@ export const registerUser = asyncHandler(async (req, res) => {
         password: hashedPassword,
         dateOfBirth,
         mobileNumber,
-        gender
+        gender,
     });
 
-    const token = await user.generateToken();
+    const token = generateToken(user._id);
+
     res.cookie('jwt', token, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'development', // Ensure secure cookies in development
         sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
-    if (user) {
-        res.status(201).json({
-            _id: user._id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            token: generateToken(user._id),
-        });
-    } else {
-        res.status(400);
-        throw new Error('Invalid user data');
-    }
-
-    
+    res.status(StatusCodes.CREATED).json({
+        _id: user._id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        token,
+    });
 });
 
 // @desc    Auth user & get token
@@ -66,23 +66,32 @@ export const registerUser = asyncHandler(async (req, res) => {
 export const loginUser = asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(400);
+        res.status(StatusCodes.BAD_REQUEST);
         throw new Error(errors.array()[0].msg);
     }
 
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (user && (await user.matchPassword(password))) {
-        res.json({
+    if (user && (await bcrypt.compare(password, user.password))) {
+        const token = generateToken(user._id);
+
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'development', // Ensure secure cookies in development
+            sameSite: 'none',
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+        });
+
+        res.status(StatusCodes.OK).json({
             _id: user._id,
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
-            token: generateToken(user._id),
+            token,
         });
     } else {
-        res.status(401);
+        res.status(StatusCodes.UNAUTHORIZED);
         throw new Error('Invalid email or password');
     }
 });
@@ -91,11 +100,13 @@ export const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/logout
 // @access  Private
 export const logoutUser = asyncHandler(async (req, res) => {
-    res.cookie('jwt', '', {
-        httpOnly: true,
-        expires: new Date(0),
-    });
-    res.status(200).json({ message: 'Logged out successfully' });
+    req.session.destroy((err) => {
+        if (err) {
+          return res.status(500).json({ message: 'Logout failed', error: err });
+        }
+        res.clearCookie('sessionId');
+        return res.status(200).json({ message: 'Logged out successfully' });
+      });
 });
 
 // @desc    Get user profile
@@ -104,7 +115,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
 export const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
-        res.json({
+        res.status(StatusCodes.OK).json({
             _id: user._id,
             firstname: user.firstname,
             lastname: user.lastname,
@@ -114,7 +125,7 @@ export const getUserProfile = asyncHandler(async (req, res) => {
             gender: user.gender,
         });
     } else {
-        res.status(404);
+        res.status(StatusCodes.NOT_FOUND);
         throw new Error('User not found');
     }
 });
@@ -124,19 +135,19 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 // @access  Private
 export const updatePassword = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    
-    if (user) {
-        if (req.body.newPassword) {
-            user.password = req.body.newPassword;
-            await user.save();
-            
-            res.json({ message: 'Password updated successfully' });
-        } else {
-            res.status(400);
-            throw new Error('Please provide new password');
-        }
-    } else {
-        res.status(404);
+
+    if (!user) {
+        res.status(StatusCodes.NOT_FOUND);
         throw new Error('User not found');
     }
+
+    if (!req.body.newPassword) {
+        res.status(StatusCodes.BAD_REQUEST);
+        throw new Error('Please provide new password');
+    }
+
+    user.password = await bcrypt.hash(req.body.newPassword, 12);
+    await user.save();
+
+    res.status(StatusCodes.OK).json({ message: 'Password updated successfully' });
 });

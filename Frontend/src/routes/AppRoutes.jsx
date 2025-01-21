@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Navbar,Footer} from "../components";
+import { Navbar, Footer } from "../components";
 import {
   Home,
   About,
@@ -11,6 +11,7 @@ import {
   Login,
   Register,
   ForgotPassword,
+  Dashboard,
   NotFound,
 } from "../pages";
 
@@ -30,9 +31,10 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 };

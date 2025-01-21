@@ -1,6 +1,6 @@
 
 import { Carousoul} from "../components";
-import {About, Contact,Timetable,Trainer} from  './index';
+import {About, Contact,Timetable,Trainer,Pricing} from  './index';
  
 
 const Home = () => {
@@ -11,7 +11,9 @@ const Home = () => {
       <About/>
       <Timetable/>
       <Trainer />
+      <Pricing />
       <Contact/>
+
       {/* <Footer></Footer> */}
     </>
   );
