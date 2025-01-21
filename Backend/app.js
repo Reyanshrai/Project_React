@@ -23,6 +23,12 @@ app.use(express.urlencoded({extended:true}))
 app.use(morgan('dev'))
 app.use(cookieParser())
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // Or whichever origins you need
+    // ... other headers
+    next();
+});
+
 app.get('/',(req,res) => {
     res.send("Hlo Backend")
 })
