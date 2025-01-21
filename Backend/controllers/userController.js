@@ -100,11 +100,13 @@ export const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/logout
 // @access  Private
 export const logoutUser = asyncHandler(async (req, res) => {
-    res.cookie('jwt', '', {
-        httpOnly: true,
-        expires: new Date(0),
-    });
-    res.status(StatusCodes.OK).json({ message: 'Logged out successfully' });
+    req.session.destroy((err) => {
+        if (err) {
+          return res.status(500).json({ message: 'Logout failed', error: err });
+        }
+        res.clearCookie('sessionId');
+        return res.status(200).json({ message: 'Logged out successfully' });
+      });
 });
 
 // @desc    Get user profile

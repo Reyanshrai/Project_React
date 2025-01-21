@@ -1,8 +1,8 @@
-import  { useState } from "react";
+import { useState } from "react";
+import axios from "../config/axios";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-
-const Registration = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,34 +14,88 @@ const Registration = () => {
     repeatPassword: "",
   });
 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value , type , checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === "radio" ? value : checked,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
+    setError("");
+
+    if (formData.password !== formData.repeatPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setError("Invalid email address!");
+      return;
+    }
+
+    console.log("Form Data", formData);
+
+    setLoading(true);
+
+    await axios
+      .post("/users/register", {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        dateOfBirth: formData.dob,
+        mobileNumber: formData.mobile,
+        gender: formData.gender,
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        setError(
+          err.response.data.message || "Registration failed. Please try again."
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* <Navbar /> */}
-      <div className="flex-grow flex items-center justify-center bg-cover bg-center bg-gray-100 dark:bg-gray-900 pt-20" style={{
+      <div
+        className="flex-grow flex items-center justify-center bg-cover bg-center bg-gray-100 dark:bg-gray-900 pt-20"
+        style={{
           backgroundImage: "url('./images/registerbg.png')",
-        }}>
-        <div className="shadow-lg rounded-lg p-8 max-w-lg w-full"
+        }}
+      >
+        <div
+          className="shadow-lg rounded-lg p-8 max-w-lg w-full"
           style={{
-            background: "transparent", // Light transparent white
-            // boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-            // backdropFilter: "blur(10px)",
-          }}>
+            background: "transparent",
+          }}
+        >
           <h2 className="text-2xl font-semibold text-gray-800 dark:text-white text-center mb-6">
             Registration Form
           </h2>
+          {error && (
+            <div className="text-red-500 text-center mb-4">{error}</div>
+          )}
           <form onSubmit={handleSubmit}>
             {/* First Name */}
             <div className="mb-4">
@@ -168,7 +222,7 @@ const Registration = () => {
                   Female
                 </label>
               </div>
-            </div>            
+            </div>
             {/* Password */}
             <div className="mb-4">
               <label
@@ -207,16 +261,15 @@ const Registration = () => {
                 required
               />
             </div>
-            {/* Submit Button */}
             <div className="mb-4">
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={loading}
               >
-                Register
+                {loading ? "Registering..." : "Register"}
               </button>
             </div>
-            {/* Signup Link */}
             <div className="text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Already have an account?{" "}
@@ -231,9 +284,8 @@ const Registration = () => {
           </form>
         </div>
       </div>
-      
     </div>
   );
 };
 
-export default Registration;
+export default Register;
