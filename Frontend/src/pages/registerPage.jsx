@@ -20,10 +20,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value , type , checked } = e.target;
+    const { name, value} = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "radio" ? value : checked,
+      [name]: value,
     }));
   };
 
