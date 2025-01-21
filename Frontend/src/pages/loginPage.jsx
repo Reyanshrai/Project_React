@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import axios from "../config/axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,8 +16,22 @@ const Login = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios.post("/users/login",{
+      email:formData.email,
+      password:formData.password
+    }).then((res)=>{
+      console.log(res.data);
+      localStorage.setItem("token",res.data.token);
+      navigate("/dashboard")
+    }).catch((err)=>{
+      console.log(err.response.data);
+    })
+
     // Handle login logic here
     console.log("Login Form Submitted", formData);
   };
