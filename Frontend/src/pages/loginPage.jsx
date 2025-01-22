@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import {UserContext} from '../context/userContext'
 import axios from "../config/axios";
 
 const Login = () => {
+
+  const {login} = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -26,7 +30,7 @@ const Login = () => {
       password:formData.password
     }).then((res)=>{
       console.log(res.data);
-      localStorage.setItem("token",res.data.token);
+      localStorage.setItem("fitness",res.data.token);
       navigate("/dashboard")
     }).catch((err)=>{
       console.log(err.response.data);
