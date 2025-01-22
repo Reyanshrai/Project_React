@@ -1,9 +1,13 @@
-
+import { useContext } from 'react';
+import {UserContext} from "../context/userContext";
 import { Activity, Calendar, Heart, TrendingUp, Weight, Timer, Target } from 'lucide-react';
 
 const FitnessDashboard = () => {
+
+  const {user,logout} = useContext(UserContext);
+
   const userData = {
-    name: "John Doe",
+    name: user.firstname,
     dailySteps: 8432,
     calories: 1250,
     weight: 75.5,
@@ -22,9 +26,10 @@ const FitnessDashboard = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 flex flex-wrap items-start justify-between">
           <h1 className="text-3xl font-bold mb-2">Welcome back, {userData.name}</h1>
-          <p className="text-gray-600">Let&apos;s crush today&apos;s goals!</p>
+          {/* <p className="text-gray-600">Let&apos;s crush today&apos;s goals!</p> */}
+          <button className='bg-red-600 text-white p-2 rounded-full font-bold '>Logout</button>
         </div>
 
         {/* Quick Stats Grid */}
