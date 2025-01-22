@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,Navigate,useLocation } from "react-router-dom";
 import { Navbar, Footer } from "../components";
 import {
   Home,
@@ -12,13 +12,23 @@ import {
   Register,
   ForgotPassword,
   Dashboard,
-  NotFound,
+  // NotFound,
 } from "../pages";
+import ProtectedRoute from "../utils/ProtectedRoute";
 
 const AppRoutes = () => {
+  
+  const isLoggedIn = localStorage.getItem("token") !== null;
+  const location = useLocation();
+
+  const hideNavbarRoutes = ['/dashboard']
+
+  const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
+
+  
   return (
     <>
-      <Navbar />
+      {shouldShowNavbar && <Navbar />}
       {/* Define your routes here */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -31,8 +41,8 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/dashboard" element={<ProtectedRoute isAuthenticated={isLoggedIn}><Dashboard/></ProtectedRoute>}/>
+        <Route path="*" element={<Navigate to = "/login"/>} />
       </Routes>
       <Footer />
     </>
