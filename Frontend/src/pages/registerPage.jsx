@@ -46,6 +46,11 @@ const Register = () => {
       return;
     }
 
+    if(formData.mobile.length !== 10){
+      setError("Mobile number should be 10 digits long");
+      return;
+    }
+
     console.log("Form Data", formData);
 
     setLoading(true);
