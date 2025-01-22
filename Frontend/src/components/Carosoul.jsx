@@ -21,7 +21,7 @@ const Carousel = () => {
       subheading: "JOIN US TODAY",
     },
   ];
-
+ 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {

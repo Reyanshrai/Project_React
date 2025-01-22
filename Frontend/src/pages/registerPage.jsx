@@ -20,10 +20,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value , type , checked } = e.target;
+    const { name, value} = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "radio" ? value : checked,
+      [name]: value,
     }));
   };
 
@@ -43,6 +43,11 @@ const Register = () => {
 
     if (!validateEmail(formData.email)) {
       setError("Invalid email address!");
+      return;
+    }
+
+    if(formData.mobile.length !== 10){
+      setError("Mobile number should be 10 digits long");
       return;
     }
 
