@@ -60,7 +60,7 @@ const Services = () => {
   };
 
   return (
-    <div className="bg-white py-10 mt-20">
+    <div className="bg-white py-10 mt-16 p-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-red-600">#03 — Services</h2>
         <p className="text-lg font-medium text-gray-700 mt-2">
@@ -70,10 +70,10 @@ const Services = () => {
       </div>
 
       {/* Carousel */}
-      <div className="relative overflow-hidden mt-20">
+      <div className="relative overflow-hidden mt-20 ">
         {/* Slides */}
         <div
-          className="flex transition-transform duration-700"
+          className="flex transition-transform duration-500"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {groupedSlides.map((group, index) => (
@@ -81,7 +81,7 @@ const Services = () => {
               {group.map((slide) => (
                 <div
                   key={slide.id}
-                  className="w-1/3 bg-gray-100 rounded-lg shadow-lg overflow-hidden relative"
+                  className="w-1/3  bg-gray-100 rounded-lg shadow-lg overflow-hidden relative"
                 >
                   <img
                     src={slide.src}
@@ -118,7 +118,7 @@ const Services = () => {
         </button>
 
         {/* Dots Indicator */}
-        <div className="absolute bottom left-1/2 transform -translate-x-1/2 flex space-x-2 ">
+        <div className="flex justify-center mt-6 space-x-2">
           {groupedSlides.map((_, index) => (
             <button
               key={index}
