@@ -1,11 +1,11 @@
 import React from "react";
-import { Navbar, Footer } from "../components";
+// import { Navbar, Footer } from "../components";
 
 const contact = () => {
   return (
     <>
-      {/* <Navbar /> */}
       <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+
         <div className="container mx-auto p-4">
           {/* Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -105,7 +105,6 @@ const contact = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };
