@@ -81,19 +81,19 @@ const Services = () => {
               {group.map((slide) => (
                 <div
                   key={slide.id}
-                  className="w-1/3  bg-gray-100 rounded-lg shadow-lg overflow-hidden relative"
+                  className="w-1/3  bg-gray-100 rounded-lg shadow-lg overflow-hidden relative hover:scale-105 transition-all duration-700"
                 >
                   <img
                     src={slide.src}
                     alt={slide.heading}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-64 object-cover"
                   />
-                  <div className="absolute bottom-4 left-0 right-0 bg-red-500 ml-2 mr-2 p-2 rounded-lg">
+                  <div className="absolute bottom-4 left-0 right-0 bg-red-500 ml-2 mr-2 p-2 rounded-lg hover:scale-105 transition-all duration-700">
                     <h3 className="text-lg font-bold text-white">
                       {slide.heading}
                     </h3>
                     <p className="text-sm text-white">{slide.subheading}</p>
-                    <button className="absolute top-4 right-2 bg-white text-red-500 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">
+                    <button className="absolute top-4 right-2 bg-white text-red-500 rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-700">
                       +
                     </button>
                   </div>
@@ -118,7 +118,7 @@ const Services = () => {
         </button>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center mt-6 space-x-2">
+        <div className="flex justify-center mt-6 space-x-2 hover:scale-105 transition-all duration-700">
           {groupedSlides.map((_, index) => (
             <button
               key={index}
