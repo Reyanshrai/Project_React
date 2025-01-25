@@ -5,20 +5,14 @@ const Carousel = () => {
     {
       id: 1,
       src: "/images/slide1.jpg",
-      heading: "GET YOUR BODY IN SHAPE",
-      subheading: "BEST FITNESS STUDIO",
     },
     {
       id: 2,
       src: "/images/slide2.jpg",
-      heading: "UNLEASH YOUR POTENTIAL",
-      subheading: "TRAIN WITH THE BEST",
     },
     {
       id: 3,
       src: "/images/slide3.jpg",
-      heading: "ACHIEVE YOUR GOALS",
-      subheading: "JOIN US TODAY",
     },
   ];
  
@@ -53,14 +47,7 @@ const Carousel = () => {
               alt={slide.heading}
               className="w-full h-full object-cover "
             />
-            <div className="absolute bottom-10 left-8">
-              <h2 className="text-sm uppercase text-white absolute top-20  ">
-                {slide.heading}
-              </h2>
-              <h1 className="text-2xl font-bold text-white border-b-4 border-red-500 inline-block mb-2">
-                {slide.subheading}
-              </h1>
-            </div>
+            
           </div>
         ))}
       </div>
