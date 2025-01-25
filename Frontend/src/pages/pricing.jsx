@@ -13,7 +13,7 @@ const Pricing = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Card 1 */}
         <div
-          className="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-8 dark:border-gray-700 mt-20 py-10 ml-20 hover:scale-105 transition-all duration-700"
+          className="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-8 dark:border-gray-700 py-10 mx-auto hover:scale-105 transition-all duration-700"
           style={{
             backgroundImage: "url('images/plan.png')", // Replace with your image URL
             backgroundSize: "cover",

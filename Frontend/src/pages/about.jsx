@@ -25,7 +25,7 @@ const About = () => {
 
             {/* Right Section - Content */}
             <div className="space-y-6 mx-20">
-              <h2 className="text-3xl font-bold text-gray-800">#2 About Us</h2>
+              <h2 className="text-3xl font-bold text-red-600">#2 About Us</h2>
               <p className="text-xl text-gray-700">
                 The fitness you will enjoy with our{" "}
                 <span className="text-red-500">#Workout</span>
