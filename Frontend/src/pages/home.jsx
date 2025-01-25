@@ -1,17 +1,18 @@
-
-import { Carousoul} from "../components";
-import {About, Contact,Timetable,Trainer,Pricing, Services} from  './index';
+import { Carosoul } from '../components';
+import {About, Contact,Timetable,Trainer,Pricing,Services} from  './index';
  
 
 const Home = () => {
   return (
     <>
-      <Carousoul></Carousoul>
+
+      <Carosoul></Carosoul>
       <About/>
       <Services/>
       <Timetable/>
       <Trainer />
       <Pricing />
+      
       <Contact/>
     </>
   );

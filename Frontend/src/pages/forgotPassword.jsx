@@ -30,7 +30,7 @@ const ForgotPassword = () => {
             // backdropFilter: "blur(10px)",
           }}
         >
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white text-center mb-6">
+          <h2 className="text-3xl font-bold text-white-800 dark:text-white text-center mb-6">
             Forgot Password
           </h2>
           <form onSubmit={handleSubmit}>
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
                 placeholder="Enter email address"
                 value={email}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -57,13 +57,13 @@ const ForgotPassword = () => {
             <div className="mb-4">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 text-2xl"
               >
                 Submit
               </button>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-800 dark:text-gray-100">
                 Remembered your password?{" "}
                 <Link 
                   to="/Login"

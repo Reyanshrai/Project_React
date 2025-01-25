@@ -95,7 +95,7 @@ const Register = () => {
             background: "transparent",
           }}
         >
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white text-center mb-6">
+          <h2 className="text-3xl font-semibold text-gray-800 dark:text-white text-center mb-6">
             Registration Form
           </h2>
           {error && (
@@ -117,7 +117,7 @@ const Register = () => {
                 placeholder="Enter first name"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -136,7 +136,7 @@ const Register = () => {
                 placeholder="Enter last name"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -155,7 +155,7 @@ const Register = () => {
                 placeholder="Enter email address"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -173,7 +173,7 @@ const Register = () => {
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -192,7 +192,7 @@ const Register = () => {
                 placeholder="Enter mobile number"
                 value={formData.mobile}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -243,7 +243,7 @@ const Register = () => {
                 placeholder="Enter password"
                 value={formData.password}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
@@ -262,21 +262,21 @@ const Register = () => {
                 placeholder="Repeat password"
                 value={formData.repeatPassword}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-800 sm:text-lg"
                 required
               />
             </div>
             <div className="mb-4">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-2xl"
                 disabled={loading}
               >
                 {loading ? "Registering..." : "Register"}
               </button>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-800 dark:text-gray-100">
                 Already have an account?{" "}
                 <Link
                   to="/login"
