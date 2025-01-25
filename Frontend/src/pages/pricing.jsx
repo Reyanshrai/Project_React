@@ -10,12 +10,12 @@ const Pricing = () => {
         The foremost source and cheap{" "}
         <span className="text-red-500">#Pricing</span>
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Card 1 */}
         <div
-          className="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-8 dark:border-gray-700 py-10 mx-auto hover:scale-105 transition-all duration-700"
+          className="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-8 dark:border-gray-700 mt-20 py-10 ml-20 hover:scale-105 transition-all duration-700"
           style={{
-            backgroundImage: "url('images/plan.png')",
+            backgroundImage: "url('images/plan.png')", // Replace with your image URL
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -30,28 +30,23 @@ const Pricing = () => {
               /month
             </span>
           </div>
-
           <ul role="list" className="space-y-5 my-7">
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> Unlimited access to
-              the GYM
+              <span className="mr-2">•</span> Unlimited access to the GYM
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> FREE drinking
-              package
+              <span className="mr-2">•</span> FREE drinking package
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> One year membership
+              <span className="mr-2">•</span> One year membership
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> 3 classes per week
+              <span className="mr-2">•</span> 3 classes per week
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> 1 Free personal
-              training
+              <span className="mr-2">•</span> 1 Free personal training
             </li>
           </ul>
-
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-200 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
@@ -79,28 +74,23 @@ const Pricing = () => {
               /month
             </span>
           </div>
-
           <ul role="list" className="space-y-5 my-7">
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> Unlimited access to
-              the GYM
+              <span className="mr-2">•</span> Unlimited access to the GYM
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> FREE drinking
-              package
+              <span className="mr-2">•</span> FREE drinking package
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> One year membership
+              <span className="mr-2">•</span> One year membership
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> 5 classes per week
+              <span className="mr-2">•</span> 5 classes per week
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> 2 Free personal
-              training
+              <span className="mr-2">•</span> 2 Free personal training
             </li>
           </ul>
-
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-200 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
@@ -128,28 +118,23 @@ const Pricing = () => {
               /month
             </span>
           </div>
-
           <ul role="list" className="space-y-5 my-7">
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> Unlimited access to
-              the GYM
+              <span className="mr-2">•</span> Unlimited access to the GYM
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> FREE drinking
-              package
+              <span className="mr-2">•</span> FREE drinking package
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> Two year membership
+              <span className="mr-2">•</span> Two year membership
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> 7 classes per week
+              <span className="mr-2">•</span> 7 classes per week
             </li>
             <li className="flex items-center justify-center text-white text-xl">
-              <span className="mr-2 text-white-500">•</span> 5 Free personal
-              training
+              <span className="mr-2">•</span> 5 Free personal training
             </li>
           </ul>
-
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-200 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"

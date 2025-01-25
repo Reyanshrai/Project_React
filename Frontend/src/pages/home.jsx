@@ -1,6 +1,5 @@
 
 import { Carousoul} from "../components";
-
 import {About, Contact,Timetable,Trainer,Pricing} from  './index';
  
 
@@ -10,6 +9,7 @@ const Home = () => {
 
       <Carousoul></Carousoul>
       <About/>
+      <Services/>
       <Timetable/>
       <Trainer />
       <Pricing />
