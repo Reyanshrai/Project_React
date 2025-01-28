@@ -1,13 +1,62 @@
 import React, { useState } from "react";
+import { ChevronLeft, ChevronRight, Plus, X, Clock, User, Dumbbell } from 'lucide-react';
 
 const Services = () => {
   const slides = [
-    { id: 1, src: "/images/slide1.jpg", heading: "Weight", subheading: "Weight Loss Session" },
-    { id: 2, src: "/images/slide2.jpg", heading: "Yoga", subheading: "Yoga Session" },
-    { id: 3, src: "/images/slide3.jpg", heading: "Energy", subheading: "Energy Blast Session" },
-    { id: 4, src: "/images/service1.png", heading: "Cardio", subheading: "Cardio Session" },
-    { id: 5, src: "/images/service2.png", heading: "Strength", subheading: "Strength Training" },
-    { id: 6, src: "/images/aboutimg1.png", heading: "Pilates", subheading: "Pilates Session" },
+    {
+      id: 1,
+      src: "/images/slide1.jpg",
+      heading: "Weight Loss",
+      subheading: "Weight Loss Session",
+      duration: "60 mins",
+      trainer: "Expert Trainers",
+      intensity: "Medium to High",
+    },
+    {
+      id: 2,
+      src: "/images/slide2.jpg",
+      heading: "Yoga",
+      subheading: "Yoga Session",
+      duration: "45 mins",
+      trainer: "Certified Instructors",
+      intensity: "Low to Medium",
+    },
+    {
+      id: 3,
+      src: "/images/slide3.jpg",
+      heading: "Energy Blast",
+      subheading: "Energy Blast Session",
+      duration: "30 mins",
+      trainer: "Professional Coaches",
+      intensity: "High",
+    },
+    {
+      id: 4,
+      src: "/images/service1.png",
+      heading: "Cardio",
+      subheading: "Cardio Session",
+      duration: "45 mins",
+      trainer: "Fitness Experts",
+      intensity: "Medium to High",
+    },
+    {
+      id: 5,
+      src: "/images/service2.png",
+      heading: "Strength",
+      subheading: "Strength Training",
+      duration: "60 mins",
+      trainer: "Professional Trainers",
+      intensity: "High",
+    },
+    {
+      id: 6,
+      src: "/images/aboutimg1.png",
+      heading: "Pilates",
+      subheading: "Pilates Session",
+      duration: "45 mins",
+      trainer: "Certified Instructors",
+      intensity: "Low to Medium",
+    },
   ];
 
   const groupedSlides = [];
@@ -30,107 +79,104 @@ const Services = () => {
     );
   };
 
-  const openModal = (image) => {
-    setModalImage(image);
-  };
-
-  const closeModal = () => {
-    setModalImage(null);
-  };
-
   return (
-    <div className="bg-white py-10 mt-16 p-6">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-red-600">#03 — Services</h2>
-        <p className="text-xl font-medium text-gray-700 mt-2">
-          We're giving guarantee for exquisite{" "}
-          <span className="text-red-500">#Services</span>
-        </p>
-      </div>
-
-      {/* Carousel */}
-      <div className="relative overflow-hidden mt-20">
-        {/* Slides */}
-        <div
-          className="flex transition-transform duration-500"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {groupedSlides.map((group, index) => (
-            <div key={index} className="flex min-w-full justify-center gap-4">
-              {group.map((slide) => (
-                <div
-                  key={slide.id}
-                  className="w-1/3 bg-gray-100 rounded-lg shadow-lg overflow-hidden relative hover:scale-105 transition-all duration-700"
-                >
-                  <img
-                    src={slide.src}
-                    alt={slide.heading}
-                    className="w-full h-64 object-cover"
-                  />
-                  <div className="absolute bottom-4 left-0 right-0 bg-red-500 ml-2 mr-2 p-2 rounded-lg hover:scale-105 transition-all duration-700">
-                    <h3 className="text-2xl font-bold text-white">
-                      {slide.heading}
-                    </h3>
-                    <p className="text-lg text-white">{slide.subheading}</p>
-                    <button
-                      onClick={() => openModal(slide.src)}
-                      className="absolute top-4 right-2 bg-white text-red-500 rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-700"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-6 mt-16">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
+            Our Premium Services
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Experience world-class fitness programs with our
+            <span className="text-red-500 font-semibold"> #Premium Services</span>
+          </p>
         </div>
 
-        {/* Navigation Buttons */}
-        <button
-          onClick={goToPrevious}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
-        >
-          ❮
-        </button>
-        <button
-          onClick={goToNext}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
-        >
-          ❯
-        </button>
+        {/* Carousel */}
+        <div className="relative overflow-hidden">
+          {/* Slides */}
+          <div
+            className="flex transition-transform duration-700 ease-in-out h-[32rem]"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {groupedSlides.map((group, index) => (
+              <div key={index} className="flex min-w-full gap-6 px-4">
+                {group.map((slide) => (
+                  <div
+                    key={slide.id}
+                    className="w-1/3 bg-white rounded-2xl shadow-lg overflow-hidden group relative transform hover:-translate-y-2 transition-all duration-300"
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={slide.src}
+                        alt={slide.heading}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
+
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                        {slide.heading}
+                      </h3>
+                      <p className="text-gray-600 mb-4">{slide.subheading}</p>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <Clock className="w-4 h-4" />
+                          <span>{slide.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <User className="w-4 h-4" />
+                          <span>{slide.trainer}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <Dumbbell className="w-4 h-4" />
+                          <span>{slide.intensity}</span>
+                        </div>
+                      </div>
+
+                      <button className="w-full mt-6 bg-gradient-to-r from-red-600 to-red-400 text-white py-3 rounded-xl font-semibold transform hover:translate-y-[-2px] transition-all duration-300">
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={goToPrevious}
+            className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-800" />
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-800" />
+          </button>
+        </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center mt-6 space-x-2 hover:scale-105 transition-all duration-700">
+        <div className="flex justify-center mt-8 gap-3">
           {groupedSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full ${
-                index === currentIndex ? "bg-red-500" : "bg-gray-500"
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex 
+                  ? "bg-red-500 w-6" 
+                  : "bg-gray-300 hover:bg-gray-400"
               }`}
-            ></button>
+            />
           ))}
         </div>
       </div>
-
-      {/* Modal */}
-      {modalImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="relative">
-            <img
-              src={modalImage}
-              alt="Zoomed Slide"
-              className="w-full max-w-3xl h-auto rounded-lg shadow-lg transition-transform transform scale-105"
-            />
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 bg-white text-red-500 rounded-full w-8 h-8 flex items-center justify-center shadow-lg"
-            >
-              ✖
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
