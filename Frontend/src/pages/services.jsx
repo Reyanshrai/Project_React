@@ -84,7 +84,6 @@ const Services = () => {
             </div>
           ))}
         </div>
-
         {/* Navigation Buttons */}
         <button
           onClick={goToPrevious}
