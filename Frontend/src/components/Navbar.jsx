@@ -6,7 +6,7 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
@@ -22,11 +22,7 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="bg-white
-       dark:bg-gray-900 fixed w-full
-        z-20 top-0 border-b border-gray-200 
-        dark:border-gray-600 
-        "
+        className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 border-b border-gray-200 dark:border-gray-600"
       >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* Logo and Title */}
@@ -42,7 +38,7 @@ const Navbar = () => {
             <h2 className="text-[#F50B0B] text-2xl md:text-3xl font-semibold">
               GYM..
               <br />
-              <span className="text-sm md:text-base dark:text-[#ffffff] absolute ">
+              <span className="text-sm md:text-base dark:text-[#ffffff] absolute">
                 FITNESS FOR ALL
               </span>
             </h2>
@@ -60,7 +56,7 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600  "
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-sticky"
               aria-expanded={isMenuOpen}
             >
@@ -90,7 +86,7 @@ const Navbar = () => {
             } items-center justify-between w-full md:flex md:w-auto md:order-1`}
             id="navbar-sticky"
           >
-            <ul className="flex flex-col md:flex-row md:space-x-8 p-4 md:p-0 mt-4 md:mt-0 font-medium border border-gray-100 rounded-lg bg-gray-50 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
+            <ul className="flex flex-col md:flex-row md:space-x-8 p-4 md:p-0 mt-4 md:mt-0 font-medium border border-gray-100 rounded-lg bg-gray-50 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               {[
                 { name: "HOME", path: "/" },
                 { name: "ABOUT", path: "/about" },
@@ -103,10 +99,9 @@ const Navbar = () => {
                 <li key={index}>
                   <Link
                     to={item.path}
-                    
                     className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
                       activeLink === item.path
-                        ? "text-blue-700 font-bold dark:text-blue-500"
+                        ? "text-red-700 font-bold dark:text-red-500"
                         : "text-gray-900 dark:text-white"
                     }`}
                   >
@@ -121,4 +116,5 @@ const Navbar = () => {
     </div>
   );
 };
+
 export default Navbar;
