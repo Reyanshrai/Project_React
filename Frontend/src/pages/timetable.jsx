@@ -1,5 +1,5 @@
-import React from "react";
-import { Navbar, Footer } from "../components";
+import React from 'react';
+import { Calendar, Clock, User } from 'lucide-react';
 
 const Timetable = () => {
   const timetable = [
@@ -75,67 +75,85 @@ const Timetable = () => {
     },
   ];
 
+  const formatSession = (session) => {
+    if (!session) return null;
+    const [title, time, trainer] = session.split('\n');
+    return { title, time, trainer };
+  };
+
   return (
-    <>
-      {/* <Navbar /> */}
-      <div className="p-8 bg-gray-50 mt-20">
-        <h1 className="text-center text-3xl font-bold text-red-600 mb-4 ">
-          #04 Timetable
+    <div className="w-full max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-8">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-red-600 mt-20">
+          Fitness Class Schedule
         </h1>
-        <h2 className="text-center text-xl font-semibold mb-6">
-          Committed to fabulous and great{" "}
-          <span className="text-red-500">#Timetable</span>
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full border border-gray-300 text-left text-sm">
-            <thead className="bg-red-500 text-white">
-              <tr>
-                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">
-                  Routine
-                </th>
-                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">
-                  10 am
-                </th>
-                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">
-                  11 am
-                </th>
-                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">
-                  03 pm
-                </th>
-                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">
-                  05 pm
-                </th>
-                <th className="p-3 border text-center hover:scale-105 transition-all duration-700">
-                  07 pm
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {timetable.map((row, index) => (
-                <tr
-                  key={index}
-                  className={
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white text-center"
-                  }
-                >
-                  <td className="border p-3 font-semibold text-gray-700 hover:scale-105 transition-all duration-700">
-                    {row.day}
-                  </td>
-                  {row.sessions.map((session, i) => (
-                    <td
-                      key={i}
-                      className="border p-3 whitespace-pre-wrap text-gray-700 text-center hover:scale-105 transition-all duration-700"
-                    >
-                      {session || "—"}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <p className="text-lg text-gray-600">
+          Transform your life with our expert-led fitness classes
+        </p>
       </div>
-    </>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-red-600">
+              <th className="p-4 text-white font-semibold text-left">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5" />
+                  <span>Day</span>
+                </div>
+              </th>
+              {['10 AM', '11 AM', '3 PM', '5 PM', '7 PM'].map((time) => (
+                <th key={time} className="p-4 text-white font-semibold">
+                  <div className="flex items-center justify-center gap-2">
+                    <Clock className="w-5 h-5" />
+                    <span>{time}</span>
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {timetable.map((row, index) => (
+              <tr
+                key={row.day}
+                className={`
+                  ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}
+                  hover:bg-gray-100 transition-colors duration-200
+                `}
+              >
+                <td className="p-4 font-semibold text-gray-700 border-b">
+                  {row.day}
+                </td>
+                {row.sessions.map((session, i) => {
+                  const formattedSession = formatSession(session);
+                  return (
+                    <td key={i} className="p-4 border-b">
+                      {formattedSession ? (
+                        <div className="bg-white rounded-lg shadow p-3 hover:shadow-md transition-shadow duration-200">
+                          <div className="font-semibold text-red-600 mb-1">
+                            {formattedSession.title}
+                          </div>
+                          <div className="text-sm text-gray-600 flex items-center gap-1 mb-1">
+                            <Clock className="w-4 h-4" />
+                            {formattedSession.time}
+                          </div>
+                          <div className="text-sm text-gray-600 flex items-center gap-1">
+                            <User className="w-4 h-4" />
+                            {formattedSession.trainer}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-gray-400 text-center">—</div>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
