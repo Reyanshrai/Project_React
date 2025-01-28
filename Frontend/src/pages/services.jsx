@@ -1,13 +1,62 @@
 import React, { useState } from "react";
+import { ChevronLeft, ChevronRight, Plus, X, Clock, User, Dumbbell } from 'lucide-react';
 
 const Services = () => {
   const slides = [
-    { id: 1, src: "/images/slide1.jpg", heading: "Weight", subheading: "Weight Loss Session" },
-    { id: 2, src: "/images/slide2.jpg", heading: "Yoga", subheading: "Yoga Session" },
-    { id: 3, src: "/images/slide3.jpg", heading: "Energy", subheading: "Energy Blast Session" },
-    { id: 4, src: "/images/service1.png", heading: "Cardio", subheading: "Cardio Session" },
-    { id: 5, src: "/images/service2.png", heading: "Strength", subheading: "Strength Training" },
-    { id: 6, src: "/images/aboutimg1.png", heading: "Pilates", subheading: "Pilates Session" },
+    {
+      id: 1,
+      src: "/images/slide1.jpg",
+      heading: "Weight Loss",
+      subheading: "Weight Loss Session",
+      duration: "60 mins",
+      trainer: "Expert Trainers",
+      intensity: "Medium to High",
+    },
+    {
+      id: 2,
+      src: "/images/slide2.jpg",
+      heading: "Yoga",
+      subheading: "Yoga Session",
+      duration: "45 mins",
+      trainer: "Certified Instructors",
+      intensity: "Low to Medium",
+    },
+    {
+      id: 3,
+      src: "/images/slide3.jpg",
+      heading: "Energy Blast",
+      subheading: "Energy Blast Session",
+      duration: "30 mins",
+      trainer: "Professional Coaches",
+      intensity: "High",
+    },
+    {
+      id: 4,
+      src: "/images/service1.png",
+      heading: "Cardio",
+      subheading: "Cardio Session",
+      duration: "45 mins",
+      trainer: "Fitness Experts",
+      intensity: "Medium to High",
+    },
+    {
+      id: 5,
+      src: "/images/service2.png",
+      heading: "Strength",
+      subheading: "Strength Training",
+      duration: "60 mins",
+      trainer: "Professional Trainers",
+      intensity: "High",
+    },
+    {
+      id: 6,
+      src: "/images/aboutimg1.png",
+      heading: "Pilates",
+      subheading: "Pilates Session",
+      duration: "45 mins",
+      trainer: "Certified Instructors",
+      intensity: "Low to Medium",
+    },
   ];
 
   const groupedSlides = [];
@@ -30,23 +79,19 @@ const Services = () => {
     );
   };
 
-  const openModal = (image) => {
-    setModalImage(image);
-  };
-
-  const closeModal = () => {
-    setModalImage(null);
-  };
-
   return (
-    <div className="bg-white py-10 mt-16 p-6">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-red-600">#03 — Services</h2>
-        <p className="text-xl font-medium text-gray-700 mt-2">
-          We're giving guarantee for exquisite{" "}
-          <span className="text-red-500">#Services</span>
-        </p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-6 mt-16">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
+            Our Premium Services
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Experience world-class fitness programs with our
+            <span className="text-red-500 font-semibold"> #Premium Services</span>
+          </p>
+        </div>
 
       {/* Carousel */}
       <div className="relative overflow-hidden mt-20">
@@ -84,6 +129,7 @@ const Services = () => {
             </div>
           ))}
         </div>
+
         {/* Navigation Buttons */}
         <button
           onClick={goToPrevious}
@@ -99,37 +145,20 @@ const Services = () => {
         </button>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center mt-6 space-x-2 hover:scale-105 transition-all duration-700">
+        <div className="flex justify-center mt-8 gap-3">
           {groupedSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full ${
-                index === currentIndex ? "bg-red-500" : "bg-gray-500"
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex 
+                  ? "bg-red-500 w-6" 
+                  : "bg-gray-300 hover:bg-gray-400"
               }`}
-            ></button>
+            />
           ))}
         </div>
       </div>
-
-      {/* Modal */}
-      {modalImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="relative">
-            <img
-              src={modalImage}
-              alt="Zoomed Slide"
-              className="w-full max-w-3xl h-auto rounded-lg shadow-lg transition-transform transform scale-105"
-            />
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 bg-white text-red-500 rounded-full w-8 h-8 flex items-center justify-center shadow-lg"
-            >
-              ✖
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
