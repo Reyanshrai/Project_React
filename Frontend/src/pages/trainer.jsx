@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Award, Linkedin, Instagram, Twitter } from 'lucide-react';
+import { Star, Award, Linkedin, Instagram, Twitter } from "lucide-react";
 
 const trainerData = [
   {
@@ -43,7 +43,7 @@ const Trainer = () => {
         </div>
 
         {/* Trainers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           {trainerData.map((trainer, index) => (
             <div
               key={index}
@@ -58,24 +58,24 @@ const Trainer = () => {
                 />
                 {/* Experience Badge */}
                 <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-lg">
-                  <p className="text-sm font-semibold text-gray-700">{trainer.experience}</p>
+                  <p className="text-sm font-semibold text-gray-700">
+                    {trainer.experience}
+                  </p>
                 </div>
               </div>
 
-                {/* Trainer Details */}
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-bold text-gray-800">
-                    {trainer.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mt-2">{trainer.caption}</p>
-                </div>
+              {/* Trainer Details */}
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold text-gray-800">
+                  {trainer.title}
+                </h3>
+                <p className="text-gray-600 text-sm mt-2">{trainer.caption}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* <Footer/> */}
+      {/* <Footer /> */}
     </>
   );
 };
