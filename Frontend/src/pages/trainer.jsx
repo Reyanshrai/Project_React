@@ -26,7 +26,7 @@ const trainer = () => {
       <div className="bg-gray-100 p-6 mt-20">
         <div className="max-w-7xl mx-auto text-center">
           {/* Header Section */}
-          <h2 className="text-3xl font-bold text-gray-800">#05 Trainers</h2>
+          <h2 className="text-3xl font-bold text-red-600">#05 Trainers</h2>
           <p className="text-xl text-gray-700 mt-2">
             We take pride in our superior{" "}
             <span className="text-red-500">#Trainers</span>
@@ -58,7 +58,6 @@ const trainer = () => {
           </div>
         </div>
       </div>
-
       {/* <Footer/> */}
     </>
   );
