@@ -1,4 +1,4 @@
-import { Navbar } from "../components";
+
 import { FaUsers, FaUserTie, FaHeart, FaDumbbell } from "react-icons/fa";
 
 const About = () => {
