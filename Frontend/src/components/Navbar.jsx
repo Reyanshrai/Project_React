@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -7,7 +7,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  useState(() => {
+  useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
 
@@ -103,7 +103,7 @@ const Navbar = () => {
                 <li key={index}>
                   <Link
                     to={item.path}
-                    onClick={() => handleActiveLink(item.path)}
+                    
                     className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
                       activeLink === item.path
                         ? "text-blue-700 font-bold dark:text-blue-500"
