@@ -1,185 +1,195 @@
-# 🏋️‍♂️ Fitness Gym Website
+# Full Stack React Project - Fitness Gym Website
 
-## Overview
-Welcome to the Fitness Gym Website project! This modern, responsive web application is designed to provide a comprehensive platform for gym members to access services, schedules, and manage their fitness journey. The project is built with a full-stack architecture, utilizing Node.js and Express for the backend, and React with Vite for the frontend.
+This is a modern full-stack web application for a fitness gym, built with React.js and Node.js. The website provides a comprehensive platform for gym members to explore services, manage memberships, and interact with trainers.
 
-## 🚀 Features
+## 🚀 Tech Stack
+
+### Frontend
+- **Framework**: React.js 18
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS + Flowbite React
+- **State Management**: React Context/Props
+- **Routing**: React Router DOM v7
+- **HTTP Client**: Axios
+- **UI Components**:
+  - Flowbite React components
+  - Swiper for carousels
+  - Lucide React icons
+  - React Icons
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JWT with bcrypt
+- **API Validation**: Express Validator
+- **Middleware**:
+  - CORS
+  - Cookie Parser
+  - Morgan (logging)
+  - Express Async Handler
+
+## 🌟 Website Features
 
 ### 📱 User Interface
-- Modern and responsive design
-- Smooth animations and transitions
-- Mobile-first approach
-- Intuitive navigation with a clean layout
+- Modern, responsive design optimized for all devices
+- Intuitive navigation with smooth transitions
+- Interactive components using Flowbite React
+- Dynamic carousels showcasing gym facilities and success stories
 
-### 🔐 Authentication
-- User registration system
-- Secure login functionality
-- Password recovery option
-- Protected routes for authenticated users
+### 🔐 User Management
+- Secure user registration and authentication
+- Personal dashboard for members
+- Password recovery system
+- Profile management
 
-### 📄 Main Pages
-1. **Home** (`/`)
-   - Welcome section
-   - Featured services
-   - Quick access to important sections
+### 💪 Core Features
+1. **Home Page**
+   - Welcome section with gym highlights
+   - Featured services and programs
+   - Success stories carousel
+   - Quick access to membership options
 
-2. **About** (`/about`)
-   - Gym history and mission
-   - Team introduction
-   - Facility information
+2. **Services**
+   - Comprehensive list of training programs
+   - Personal training options
+   - Group classes information
+   - Specialized workout programs
 
-3. **Services** (`/services`)
-   - Comprehensive list of gym services
-   - Service details and benefits
-   - Membership options
-
-4. **Timetable** (`/timetable`)
-   - Class schedules
-   - Training sessions
-   - Availability tracking
-
-5. **Trainers** (`/trainer`)
+3. **Trainers**
    - Professional trainer profiles
-   - Expertise and specializations
-   - Booking options
+   - Expertise and certifications
+   - Booking system for personal sessions
+   - Trainer availability calendar
 
-6. **Pricing** (`/pricing`)
-   - Membership plans
-   - Package comparisons
-   - Special offers
+4. **Class Timetable**
+   - Weekly class schedule
+   - Real-time class availability
+   - Class descriptions and difficulty levels
+   - Online booking system
 
-7. **Contact** (`/contact`)
-   - Contact form
-   - Location information
+5. **Pricing Plans**
+   - Flexible membership options
+   - Detailed plan comparisons
+   - Special offers and promotions
+   - Secure payment integration
+
+6. **Contact & Support**
+   - Interactive contact form
+   - Gym location with map
    - Business hours
+   - Emergency contact information
 
-### 👤 User Features
-- **Login** (`/login`)
-- **Registration** (`/register`)
-- **Password Recovery** (`/forgot-password`)
-- **Dashboard** (for registered users)
+7. **Member Dashboard**
+   - Personal workout tracking
+   - Class booking history
+   - Membership status and renewal
+   - Progress monitoring
 
-## 🛠️ Technical Stack
-
-- **Backend:** Node.js, Express.js, MongoDB
-- **Frontend:** React.js, Vite, Tailwind CSS
-- **Styling:** Tailwind CSS
-- **State Management:** React Hooks
-- **Form Handling:** React Hook Form
-- **Routing:** React Router v6
-- **Code Quality:** ESLint
-
-## 📂 Project Structure
-
-### Backend Structure
-```
-Backend/
-├── .env                 # Environment variables
-├── .gitignore           # Git ignore file
-├── app.js               # Main application entry point
-├── controllers/         # Route controllers
-│   └── userController.js# User-related controllers
-├── database/            # Database connection
-│   └── db.js            # MongoDB connection setup
-├── middleware/          # Custom middleware functions
-│   └── authMiddleware.js# Authentication middleware
-├── models/              # Database models
-│   └── userModel.js     # User model
-├── routes/              # API routes
-│   └── userRoutes.js    # User-related routes
-├── validators/          # Request validators
-│   └── userValidation.js# User validation rules
-├── package.json         # Project configuration and dependencies
-└── package-lock.json    # Locked versions of dependencies
-```
+## 📁 Project Structure
 
 ### Frontend Structure
 ```
 Frontend/
-├── .env                 # Environment variables
-├── .gitignore           # Git ignore file
-├── README.md            # Frontend specific documentation
-├── eslint.config.js     # ESLint configuration
-├── index.html           # Entry HTML file
-├── node_modules/        # Node.js dependencies
-├── package.json         # Project configuration and dependencies
-├── package-lock.json    # Locked versions of dependencies
-├── postcss.config.js    # PostCSS configuration
-├── public/              # Static assets
-├── src/                 # Source code directory
-│   ├── App.css          # Main application styles
-│   ├── App.jsx          # Main application component
-│   ├── assets/          # Static assets for the application
-│   ├── components/      # Reusable components
-│   │   ├── Footer.jsx   # Footer component
-│   │   ├── Navbar.jsx   # Navigation bar component
-│   │   └── index.js     # Components barrel file
-│   ├── context/         # Context API for state management
-│   │   └── userContext.jsx # User context
-│   ├── pages/           # Application pages
-│   │   ├── about.jsx    # About page
-│   │   ├── contact.jsx  # Contact page
-│   │   ├── dashboard.jsx# Dashboard page
-│   │   ├── forgotPassword.jsx # Forgot Password page
-│   │   ├── home.jsx     # Home page
-│   │   ├── loginPage.jsx# Login page
-│   │   ├── NotFound.jsx # 404 Not Found page
-│   │   ├── pricing.jsx  # Pricing page
-│   │   ├── registerPage.jsx # Registration page
-│   │   ├── services.jsx # Services page
-│   │   ├── timetable.jsx# Timetable page
-│   │   ├── trainer.jsx  # Trainer page
-│   │   └── index.js     # Pages barrel file
-│   ├── routes/          # Application routes
-│   │   └── AppRoutes.jsx# Route definitions
-│   ├── utils/           # Utility functions
-│   │   └── ProtectedRoute.jsx # Protected route component
-│   ├── main.jsx         # Application entry point
-│   └── index.css        # Global styles including Tailwind imports
-├── tailwind.config.js   # Tailwind CSS configuration
-└── vite.config.js       # Vite bundler configuration
+├── public/           # Static files
+├── src/             # Source code
+├── .env             # Environment variables
+├── index.html       # Entry HTML file
+├── vite.config.js   # Vite configuration
+├── tailwind.config.js # Tailwind CSS configuration
+└── package.json     # Dependencies and scripts
 ```
 
-## 🔧 Development Setup
+### Backend Structure
+```
+Backend/
+├── controllers/     # Route controllers
+├── models/         # Database models
+├── routes/         # API routes
+├── middleware/     # Custom middleware
+├── validators/     # Request validators
+├── database/       # Database configuration
+├── .env           # Environment variables
+├── app.js         # Express app setup
+└── server.js      # Server entry point
+```
 
-### Backend Setup:
-1. Navigate to the Backend directory
-2. Install dependencies:
+## 🛠️ Setup and Installation
+
+1. Clone the repository
+2. Set up the Backend:
    ```bash
+   cd Backend
    npm install
    ```
-3. Set up your `.env` file with the necessary environment variables
-4. Start the server:
+3. Set up the Frontend:
    ```bash
-   npm start
-   ```
-
-### Frontend Setup:
-1. Navigate to the Frontend directory
-2. Install dependencies:
-   ```bash
+   cd Frontend
    npm install
    ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
 
-## 🌐 Browser Support
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+## 🚀 Running the Application
 
-## 📝 Contributing
+### Backend
+```bash
+cd Backend
+npm start
+```
+
+### Frontend
+```bash
+cd Frontend
+npm run dev
+```
+
+## 🔑 Environment Variables
+
+### Backend (.env)
+Required environment variables:
+- `MONGODB_URI`: MongoDB connection string
+- `JWT_SECRET`: Secret key for JWT
+- `PORT`: Server port (default: 5000)
+
+### Frontend (.env)
+Required environment variables:
+- `VITE_API_URL`: Backend API URL
+
+## 📦 Dependencies
+
+### Frontend Dependencies
+- React and React DOM
+- React Router for navigation
+- Axios for API requests
+- Flowbite and Tailwind for UI
+- Various UI utilities and components
+
+### Backend Dependencies
+- Express.js for server framework
+- Mongoose for MongoDB interactions
+- JWT and bcrypt for authentication
+- Express validators for request validation
+- Various middleware utilities
+
+## 🔒 Security Features
+- JWT-based authentication
+- Password hashing with bcrypt
+- Request validation
+- Protected API routes
+- HTTP-only cookies
+- CORS protection
+
+## 💻 Development Tools
+- ESLint for code linting
+- Nodemon for backend development
+- Vite for frontend development
+- PostCSS for CSS processing
+
+## 🤝 Contributing
 1. Fork the repository
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
 
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-Built with ❤️ by React Team - [Reyanshrai](https://github.com/Reyanshrai/Project_React) • [Vivek Kumar](https://github.com/vsah7079) • [Himanshu Kumar](https://github.com/himanshu-kumar-911)
+## 📝 License
+This project is licensed under the ISC License.
