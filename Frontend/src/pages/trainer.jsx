@@ -136,5 +136,4 @@ const Trainer = () => {
     </div>
   );
 };
-
 export default Trainer;
