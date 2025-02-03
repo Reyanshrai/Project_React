@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';  // Ensure the Navbar import is corre
 
 const Home = () => {
   // Initialize refs properly
+  const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
   const timetableRef = useRef(null);
@@ -14,6 +15,7 @@ const Home = () => {
 
   // Create sections object
   const sections = {
+    home: homeRef,
     about: aboutRef,
     services: servicesRef,
     timetable: timetableRef,
@@ -32,7 +34,7 @@ const Home = () => {
   return (
     <>
       <Navbar scrollToSection={scrollToSection} sections={sections} />
-      <Carosoul />
+      <div ref ={homeRef}><Carosoul /></div>
       <div ref={aboutRef}><About /></div>
       <div ref={servicesRef}><Services /></div>
       <div ref={timetableRef}><Timetable /></div>
