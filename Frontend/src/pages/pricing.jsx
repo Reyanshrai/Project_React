@@ -1,6 +1,9 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 const Pricing = () => {
+
+  const navigate = useNavigate();
   return (
     <div className="p-8 bg-gray-50 mt-20">
       <h1 className="text-center text-2xl font-bold text-red-600 mb-4">
@@ -50,6 +53,7 @@ const Pricing = () => {
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-200 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
+            onClick={() => navigate("/login")}
           >
             Choose plan
           </button>
@@ -94,6 +98,7 @@ const Pricing = () => {
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-200 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
+            onClick={() => navigate("/login")}
           >
             Choose plan
           </button>
@@ -138,6 +143,7 @@ const Pricing = () => {
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-200 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
+            onClick={() => navigate("/login")}
           >
             Choose plan
           </button>
