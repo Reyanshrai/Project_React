@@ -16,6 +16,7 @@ import {
   Dashboard,
   NotFound,
 } from "../pages";
+
 import ProtectedRoute from "../utils/ProtectedRoute";
 
 const AppRoutes = () => {
