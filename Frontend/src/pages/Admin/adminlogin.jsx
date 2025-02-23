@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Dumbbell, Lock, Mail } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function AdminLogin({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,13 +15,14 @@ function AdminLogin({ onLogin }) {
     if (email === 'admin@gym.com' && password === 'admin123') {
       onLogin(email, password);
       toast.success('Welcome back, Admin!');
+      navigate('/Admin/AdminDashboard');
     } else {
       toast.error('Invalid credentials');
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center p-4 mt-20">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
         <div className="flex items-center justify-center mb-8">
           <div className="bg-red-100 p-3 rounded-full">

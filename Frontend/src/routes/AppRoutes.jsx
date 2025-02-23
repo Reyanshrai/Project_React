@@ -18,14 +18,18 @@ import {
 } from "../pages";
 
 import ProtectedRoute from "../utils/ProtectedRoute";
+import AdminLogin from "../pages/Admin/adminlogin";
+import AdminDashboard from "../pages/Admin/dashboard";
+import Members from "../pages/Admin/member";
+import Payment from "../pages/Admin/payment";
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
   const isLoggedIn = !!user;
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/dashboard"];
-  const hideFooterRoutes = ["/dashboard"];
+  const hideNavbarRoutes = ["/dashboard ,/AdminDashboard"];
+  const hideFooterRoutes = ["/dashboard ,/AdminDashboard"];
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
@@ -40,9 +44,15 @@ const AppRoutes = () => {
         <Route path="/trainer" element={<Trainer />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Member" element={<Members/>} />
+        <Route path="/Payment" element={<Payment/>} />
         <Route
           path="/login"
           element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />}
+        />
+        <Route
+          path="/AdminLogin"
+          element={isLoggedIn ? <Navigate to="/AdminDashboard" /> : <AdminLogin/>}
         />
         <Route
           path="/register"
@@ -55,6 +65,14 @@ const AppRoutes = () => {
             <ProtectedRoute isAuthenticated={isLoggedIn}>
               <Dashboard />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminDashboard"
+          element={
+        
+              <AdminDashboard/>
+            
           }
         />
         <Route path="*" element={<NotFound />} />
