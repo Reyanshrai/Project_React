@@ -39,15 +39,6 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-// userSchema.methods.matchPassword = async function (enteredPassword) {
-//     return await bcrypt.compare(enteredPassword, this.password);
-// };
-
-// userSchema.methods.generateToken = function () {
-//     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-//         expiresIn: '1d',
-//     });
-// };
 
 const User = mongoose.model('User', userSchema);
 
