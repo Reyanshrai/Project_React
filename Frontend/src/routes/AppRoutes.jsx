@@ -48,7 +48,7 @@ const AppRoutes = () => {
           element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />}
         />
         <Route
-          path="/AdminLogin"
+          path="/Admin-Login"
           element={isLoggedIn ? <Navigate to="/AdminDashboard" /> : <AdminLogin/>}
         />
         <Route
