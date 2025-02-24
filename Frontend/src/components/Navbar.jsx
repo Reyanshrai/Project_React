@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   const handleAdminLogin = () => {
-    navigate("/AdminLogin");
+    navigate("/Admin-Login");
     closeModal();
   };
 
