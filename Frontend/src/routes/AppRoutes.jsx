@@ -18,17 +18,17 @@ import {
 } from "../pages";
 
 import ProtectedRoute from "../utils/ProtectedRoute";
-import AdminLogin from "../pages/Admin/adminlogin";
-import AdminDashboard from "../pages/Admin/dashboard";
-import Members from "../pages/Admin/member";
-import Payment from "../pages/Admin/payment";
+import AdminLogin from "../pages/Admin/Adminlogin";
+import AdminDashboard from "../pages/Admin/Dashboard";
+import Members from "../pages/Admin/Member";
+import Payment from "../pages/Admin/Payment";
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
   const isLoggedIn = !!user;
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/dashboard ,/AdminDashboard"];
+  const hideNavbarRoutes = ["/dashboard"];
   const hideFooterRoutes = ["/dashboard ,/AdminDashboard"];
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
