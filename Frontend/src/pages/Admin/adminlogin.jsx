@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import { Dumbbell, Lock, Mail } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import axios from "../../config/axios";
 
 function AdminLogin({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -10,15 +11,19 @@ function AdminLogin({ onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // For demo purposes, hardcoded credentials
-    if (email === 'admin@gym.com' && password === 'admin123') {
+
+    axios.post("/admin/login",{
+      email: email,
+      password: password,
+    }).then(()=>{
       onLogin(email, password);
       toast.success('Welcome back, Admin!');
-      navigate('/Admin/AdminDashboard');
-    } else {
-      toast.error('Invalid credentials');
-    }
+      navigate('/AdminDashboard');
+    }).catch((err)=>{
+      console.log(err.response?.data);
+      toast.error(err.response?.data?.message || "Invalid Email or Password");
+    })
+    
   };
 
   return (
