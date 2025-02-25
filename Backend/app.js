@@ -35,7 +35,7 @@ app.get('/',(req,res) => {
 })
 
 app.use('/users',userRoutes)
-app.use('/admin',adminRoutes)
+app.use('/admins',adminRoutes)
 
 
 export default app;
