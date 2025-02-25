@@ -8,6 +8,7 @@ createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <UserProvider>
       <App />
+      
     </UserProvider>
   </BrowserRouter>
 );
