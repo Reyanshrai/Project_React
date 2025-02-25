@@ -1,7 +1,11 @@
 import {Router} from 'express'
-import {validateAdminLogin} from '../validators/adminValidation'
-import {Adminlogin} from '../controllers/adminController'
+import {validateAdminRegister,validateAdminLogin} from '../validators/adminValidation.js'
+import {adminRegister,adminlogin} from '../controllers/adminController.js'
+
 
 const router = Router()
 
-router.post("/admin-login",validateAdminLogin,Adminlogin)
+router.post("/register",validateAdminRegister,adminRegister)
+router.post("/login",validateAdminLogin,adminlogin)
+
+export default router
