@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios from "../../config/axios";
 
-function AdminLogin({ onLogin }) {
+function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -12,11 +12,11 @@ function AdminLogin({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("/admin/login",{
+    axios.post("/admins/login",{
       email: email,
       password: password,
     }).then(()=>{
-      onLogin(email, password);
+      // onLogin(email, password);
       toast.success('Welcome back, Admin!');
       navigate('/AdminDashboard');
     }).catch((err)=>{
