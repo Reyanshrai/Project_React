@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
-import Members from './member';
-import Payments from './payment';
-import Trainers from './trainer';
+import Members from './Member';
+import Payments from './Payment';
+import Trainers from './Trainer';
 import AddTrainerModal from '../../components/AddTrainerModal';
 import { Users, LayoutDashboard, Pencil, Trash2, Search } from 'lucide-react';
 import toast from 'react-hot-toast';

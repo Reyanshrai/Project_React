@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import connectDB from './database/db.js'
 import cookieParser from 'cookie-parser'
 import userRoutes from './routes/userRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 
 // Load environment variables first
@@ -34,6 +35,7 @@ app.get('/',(req,res) => {
 })
 
 app.use('/users',userRoutes)
+app.use('/admins',adminRoutes)
 
 
 export default app;
