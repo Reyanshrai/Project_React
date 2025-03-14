@@ -2,7 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import morgan from 'morgan'
-import connectDB from './database/db.js'
+import connectMongoDB from './database/mongoDb.js' //mongodb
+import {connectPostGre} from './database/postgreDb.js' //postgreSql
 import cookieParser from 'cookie-parser'
 import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
@@ -14,8 +15,9 @@ dotenv.config()
 // Initialize express app
 const app = express()
 
-// Connect to MongoDB
-connectDB()
+// Connect to Databases
+connectMongoDB()
+// connectPostGre()
 
 // Middleware
 app.use(cors())
