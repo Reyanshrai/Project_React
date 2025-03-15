@@ -17,7 +17,7 @@ const app = express()
 
 // Connect to Databases
 connectMongoDB()
-// connectPostGre()
+connectPostGre()
 
 // Middleware
 app.use(cors())
