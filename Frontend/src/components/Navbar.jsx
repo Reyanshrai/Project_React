@@ -37,14 +37,14 @@ const Navbar = () => {
   return (
     <div>
       <nav className="bg-white dark:bg-gray-900 fixed w-full z-50 top-0 border-b border-gray-200 dark:border-gray-600">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="w-full max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* Logo and Title */}
           <a href="home" className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="/images/logo.png" className="w-12 h-13" alt="Flowbite Logo" />
             <h2 className="text-[#F50B0B] text-2xl md:text-3xl font-semibold">
               GYM..
               <br />
-              <span className="text-sm md:text-base dark:text-[#ffffff] absolute ">
+              <span className="text-sm md:text-base dark:text-[#ffffff] absolute">
                 FITNESS FOR ALL
               </span>
             </h2>
@@ -55,7 +55,7 @@ const Navbar = () => {
             <button
               onClick={handleGetStarted}
               type="button"
-              className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 hover:scale-105 transition-all duration-700"
+              className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-base sm:text-sm px-5 py-3 sm:px-4 sm:py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 hover:scale-105 transition-all duration-700"
             >
               Get Started
             </button>
@@ -103,14 +103,20 @@ const Navbar = () => {
 
       {/* Modal for Login Options */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-11/12 sm:max-w-sm text-center">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Choose Login</h2>
             <div className="flex flex-col space-y-4">
-              <button onClick={handleAdminLogin} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              <button
+                onClick={handleAdminLogin}
+                className="bg-blue-600 text-white text-base sm:text-sm px-5 py-3 sm:px-4 sm:py-2 rounded-lg hover:bg-blue-700 transition"
+              >
                 Admin Login
               </button>
-              <button onClick={handleUserLogin} className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+              <button
+                onClick={handleUserLogin}
+                className="bg-green-600 text-white text-base sm:text-sm px-5 py-3 sm:px-4 sm:py-2 rounded-lg hover:bg-green-700 transition"
+              >
                 User Login
               </button>
               <button onClick={closeModal} className="text-gray-600 hover:text-gray-800 transition">
