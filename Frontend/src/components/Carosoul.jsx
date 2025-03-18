@@ -5,17 +5,23 @@ const Carousel = () => {
     {
       id: 1,
       src: "/images/slide1.jpg",
+      heading: "Transform Your Body",
+      subheading: "Join our expert-led fitness programs",
     },
     {
       id: 2,
       src: "/images/slide2.jpg",
+      heading: "Achieve Your Goals",
+      subheading: "Personalized workouts for every level",
     },
     {
       id: 3,
       src: "/images/slide3.jpg",
+      heading: "Strength & Endurance",
+      subheading: "Push your limits and become stronger",
     },
   ];
- 
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -45,9 +51,22 @@ const Carousel = () => {
             <img
               src={slide.src}
               alt={slide.heading}
-              className="w-full h-full object-cover "
+              className="w-full h-full object-cover"
             />
-            
+
+            {/* Overlay Content (Aligned Left) */}
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center pl-10 md:pl-20 text-white">
+              <div className="max-w-lg">
+                <h2 className="text-3xl md:text-5xl font-bold relative">
+                  {slide.heading}
+                  <span className="block w-24 md:w-32 h-1 bg-red-500 mt-2"></span>
+                </h2>
+                <p className="text-lg md:text-2xl mt-4 relative">
+                  {slide.subheading}
+                  <span className="block w-20 md:w-28 h-1 bg-red-500 mt-2"></span>
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -67,7 +86,7 @@ const Carousel = () => {
       </button>
 
       {/* Dots Indicator */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-10 flex space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
