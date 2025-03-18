@@ -91,7 +91,7 @@ To keep your branch up-to-date with the latest changes from `main`:
 
 ## Latest Commit Command
    ```bash 
-      git log -n 2 --pretty=format:"%h - %s (%an, %ar)" > recent_commits.txt
+      321/., 
    ```
 
 ## If you want to check the total commits for a specific branch:
