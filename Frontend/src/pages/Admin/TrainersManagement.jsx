@@ -301,7 +301,7 @@ function TrainersManagement() {
     <form 
       ref={formRef}
       onSubmit={(e) => handleFormSubmit(e, onSubmit)} 
-      className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4"
+      className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4"
     >
       <div>
         <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -556,18 +556,18 @@ function TrainersManagement() {
         />
       </div>
 
-      <div className="md:col-span-2 flex justify-end space-x-4 pt-4">
+      <div className="md:col-span-2 flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
         <button
           type="button"
           onClick={() => showEditModal ? setShowEditModal(false) : setShowAddModal(false)}
-          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 w-full sm:w-auto"
           tabIndex={0}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+          className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 w-full sm:w-auto"
           disabled={loading}
           tabIndex={0}
         >
@@ -608,11 +608,11 @@ function TrainersManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Trainers Management</h2>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
+        <h2 className="text-xl sm:text-2xl font-bold">Trainers Management</h2>
         <button
           onClick={handleAddModalOpen}
-          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center gap-2"
+          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
         >
           <Plus size={20} />
           Add Trainer
@@ -624,7 +624,7 @@ function TrainersManagement() {
           <div className="relative">
             <input
               type="text"
-              placeholder="Search trainers by name, email, or specialization..."
+              placeholder="Search trainers..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500"
@@ -646,42 +646,43 @@ function TrainersManagement() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Specialization</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Experience</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Working Hours</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Specialization</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Experience</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Contact</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Working Hours</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredTrainers.map((trainer) => (
                   <tr key={trainer._id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{trainer.fullName}</div>
-                          <div className="text-sm text-gray-500">{trainer.email}</div>
+                        <div>
+                          <div className="text-xs sm:text-sm font-medium text-gray-900">{trainer.fullName}</div>
+                          <div className="text-xs text-gray-500 md:hidden">{trainer.specialization}</div>
+                          <div className="text-xs text-gray-500 sm:hidden">{trainer.experience} yrs</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden md:table-cell">
                       <div className="flex items-center">
                         <Award className="mr-2 text-yellow-500" size={16} />
-                        <span>{trainer.specialization}</span>
+                        <span className="text-xs sm:text-sm">{trainer.specialization}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden sm:table-cell text-xs sm:text-sm">
                       {trainer.experience} years
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden md:table-cell text-xs sm:text-sm">
                       {trainer.phoneNumber}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden lg:table-cell text-xs sm:text-sm">
                       {trainer.workingHours}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">
                       <span className={`px-2 py-1 rounded-full text-xs ${
                         trainer.status === 'Active' 
                           ? 'bg-green-100 text-green-800' 
@@ -692,19 +693,23 @@ function TrainersManagement() {
                         {trainer.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button
-                        onClick={() => handleEditModalOpen(trainer)}
-                        className="text-blue-600 hover:text-blue-900 mr-3"
-                      >
-                        <Edit size={18} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteTrainer(trainer._id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        <Trash2 size={18} />
-                      </button>
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleEditModalOpen(trainer)}
+                          className="text-blue-600 hover:text-blue-900"
+                          aria-label="Edit trainer"
+                        >
+                          <Edit size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteTrainer(trainer._id)}
+                          className="text-red-600 hover:text-red-900"
+                          aria-label="Delete trainer"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -717,9 +722,9 @@ function TrainersManagement() {
       {/* Add Trainer Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center p-6 border-b">
-              <h3 className="text-xl font-bold">Add New Trainer</h3>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center p-4 sm:p-6 border-b">
+              <h3 className="text-lg sm:text-xl font-bold">Add New Trainer</h3>
               <button
                 onClick={() => setShowAddModal(false)}
                 className="text-gray-500 hover:text-gray-700"
@@ -739,9 +744,9 @@ function TrainersManagement() {
       {/* Edit Trainer Modal */}
       {showEditModal && selectedTrainer && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center p-6 border-b">
-              <h3 className="text-xl font-bold">Edit Trainer</h3>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center p-4 sm:p-6 border-b">
+              <h3 className="text-lg sm:text-xl font-bold">Edit Trainer</h3>
               <button
                 onClick={() => setShowEditModal(false)}
                 className="text-gray-500 hover:text-gray-700"

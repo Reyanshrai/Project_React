@@ -18,7 +18,7 @@ function AdminLogin() {
     }).then(()=>{
       // onLogin(email, password);
       toast.success('Welcome back, Admin!');
-      navigate('/AdminDashboard');
+      navigate('/admin-dashboard');
     }).catch((err)=>{
       console.log(err.response?.data);
       toast.error(err.response?.data?.message || "Invalid Email or Password");

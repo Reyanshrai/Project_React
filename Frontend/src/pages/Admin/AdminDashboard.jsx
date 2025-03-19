@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
-import Sidebar from '../../components/Sidebar';
-import Members from './Member';
-import Payments from './Payment';
-import Trainers from './Trainer';
-import GymMembers from './GymMembers';
-import TrainersManagement from './TrainersManagement';
+import Sidebar from '../../components/AdminSidebar';
+import {GymMembers,TrainersManagement,Payments} from './index';
 import AddTrainerModal from '../../components/AddTrainerModal';
 import { Users, LayoutDashboard, Pencil, Trash2, Search } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -32,6 +28,7 @@ function AdminDashboard() {
     phoneNo: '',
     timeToWork: ''
   });
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -123,23 +120,27 @@ function AdminDashboard() {
     toast.success('User updated successfully');
   };
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   const renderMainContent = () => {
     if (activeTab === 'dashboard') {
       return (
         <div className="space-y-6">
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Total Members</h3>
-              <p className="text-3xl font-bold">{stats.membersCount}</p>
+              <p className="text-2xl sm:text-3xl font-bold">{stats.membersCount}</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Total Trainers</h3>
-              <p className="text-3xl font-bold">{stats.trainersCount}</p>
+              <p className="text-2xl sm:text-3xl font-bold">{stats.trainersCount}</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow sm:col-span-2 md:col-span-1">
               <h3 className="text-lg font-semibold mb-2">Total Revenue</h3>
-              <p className="text-3xl font-bold">${stats.totalRevenue}</p>
+              <p className="text-2xl sm:text-3xl font-bold">${stats.totalRevenue}</p>
             </div>
           </div>
 
@@ -163,39 +164,43 @@ function AdminDashboard() {
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Email</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Join Date</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Actions</th>
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">Name</th>
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">Email</th>
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 hidden sm:table-cell">Join Date</th>
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 hidden sm:table-cell">Status</th>
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {filteredUsers.map((user) => (
                     <tr key={user.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.name}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.joinDate}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">{user.name}</td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900 truncate max-w-[120px] sm:max-w-none">{user.email}</td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900 hidden sm:table-cell">{user.joinDate}</td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm hidden sm:table-cell">
                         <span className={`px-2 py-1 rounded-full text-xs ${
                           user.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                         }`}>
                           {user.status}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        <button
-                          onClick={() => handleEdit(user)}
-                          className="text-blue-600 hover:text-blue-800 mr-2"
-                        >
-                          <Pencil size={16} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(user.id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 size={16} />
-                        </button>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => handleEdit(user)}
+                            className="text-blue-600 hover:text-blue-800"
+                            aria-label="Edit user"
+                          >
+                            <Pencil size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(user.id)}
+                            className="text-red-600 hover:text-red-800"
+                            aria-label="Delete user"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -220,12 +225,44 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+      {/* Mobile menu button */}
+      <div className="md:hidden fixed top-0 left-0 z-50 p-4">
+        <button 
+          onClick={toggleSidebar}
+          className="p-2 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
       
-      <div className="flex-1 p-8">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold">
+      {/* Sidebar with responsive behavior */}
+      <div className={`${sidebarOpen ? 'block' : 'hidden'} md:block md:relative fixed inset-0 z-40`}>
+        <div className="md:relative md:w-auto">
+          {/* Overlay for mobile */}
+          <div 
+            className="md:hidden fixed inset-0 bg-black bg-opacity-50"
+            onClick={toggleSidebar}
+          ></div>
+          
+          {/* Actual sidebar */}
+          <div className="md:relative w-64 h-full md:h-screen bg-white shadow-lg">
+            <Sidebar 
+              activeTab={activeTab} 
+              onTabChange={(tab) => {
+                setActiveTab(tab);
+                setSidebarOpen(false);
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      
+      <div className="flex-1 p-4 sm:p-6 md:p-8 mt-12 md:mt-0">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl font-bold">
             {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
           </h1>
         </div>
@@ -252,8 +289,8 @@ function AdminDashboard() {
 
         {/* Edit User Modal */}
         {editingUser && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg w-96">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white p-4 sm:p-6 rounded-lg w-full max-w-md">
               <h2 className="text-xl font-bold mb-4">Edit User</h2>
               <form onSubmit={handleUpdate} className="space-y-4">
                 <div>
