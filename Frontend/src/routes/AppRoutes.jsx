@@ -18,7 +18,13 @@ import {
 } from "../pages";
 
 import ProtectedRoute from "./ProtectedRoute";
-import {AdminDashboard, AdminLogin, Payments, GymMembers, TrainersManagement} from "../pages/Admin"
+import {
+  AdminDashboard,
+  AdminLogin,
+  Payments,
+  GymMembers,
+  TrainersManagement,
+} from "../pages/Admin";
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -41,14 +47,16 @@ const AppRoutes = () => {
         <Route path="/trainer" element={<Trainer />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
-        
+
         <Route
           path="/login"
           element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />}
         />
         <Route
           path="/admin/login"
-          element={isLoggedIn ? <Navigate to="/admin-dashboard" /> : <AdminLogin/>}
+          element={
+            isLoggedIn ? <Navigate to="/admin-dashboard" /> : <AdminLogin />
+          }
         />
         <Route
           path="/register"
@@ -65,7 +73,11 @@ const AppRoutes = () => {
         />
         <Route
           path="/admin-dashboard"
-          element={<AdminDashboard/>}
+          element={
+            <ProtectedRoute isAuthenticated={isLoggedIn}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
