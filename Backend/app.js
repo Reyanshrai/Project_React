@@ -7,6 +7,8 @@ import {connectPostGre} from './database/postgreDb.js' //postgreSql
 import cookieParser from 'cookie-parser'
 import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
+import memberRoutes from './routes/memberRoutes.js'
+import trainerRoutes from './routes/trainerRoutes.js'
 
 
 // Load environment variables first
@@ -38,6 +40,8 @@ app.get('/',(req,res) => {
 
 app.use('/users',userRoutes)
 app.use('/admins',adminRoutes)
+app.use('/members',memberRoutes)
+app.use('/trainers',trainerRoutes)
 
 
 export default app;

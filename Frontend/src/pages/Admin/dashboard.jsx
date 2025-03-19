@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Members from './Member';
 import Payments from './Payment';
 import Trainers from './Trainer';
+import GymMembers from './GymMembers';
+import TrainersManagement from './TrainersManagement';
 import AddTrainerModal from '../../components/AddTrainerModal';
 import { Users, LayoutDashboard, Pencil, Trash2, Search } from 'lucide-react';
 import toast from 'react-hot-toast';
+import axios from '../../config/axios';
 
 // Initial mock data
 const initialTrainers = [
@@ -14,19 +17,13 @@ const initialTrainers = [
   { id: 3, fullName: 'Mike Wilson', position: 'Personal Trainer', phoneNo: '3456789012', timeToWork: '8 AM to 4 PM' }
 ];
 
-const initialUsers = [
-  { id: '1', name: 'John Doe', email: 'john@example.com', joinDate: '2025-01-15', status: 'Active' },
-  { id: '2', name: 'Jane Smith', email: 'jane@example.com', joinDate: '2025-02-01', status: 'Active' },
-  { id: '3', name: 'Mike Johnson', email: 'mike@example.com', joinDate: '2025-02-10', status: 'Inactive' },
-  { id: '4', name: 'Sarah Wilson', email: 'sarah@example.com', joinDate: '2025-02-15', status: 'Active' },
-  { id: '5', name: 'Tom Brown', email: 'tom@example.com', joinDate: '2025-02-20', status: 'Active' },
-];
-
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showAddTrainer, setShowAddTrainer] = useState(false);
   const [trainers, setTrainers] = useState(initialTrainers);
-  const [users, setUsers] = useState(initialUsers);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingUser, setEditingUser] = useState(null);
   const [newTrainer, setNewTrainer] = useState({
@@ -36,6 +33,44 @@ function AdminDashboard() {
     timeToWork: ''
   });
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/users/all');
+        const userData = response.data.users.map(user => {
+          // Create a sensible join date even if created_at or createdAt is missing
+          let joinDate;
+          try {
+            joinDate = user.created_at || user.createdAt 
+              ? new Date(user.created_at || user.createdAt).toISOString().split('T')[0]
+              : new Date().toISOString().split('T')[0]; // Default to today if no date available
+          } catch (e) {
+            joinDate = new Date().toISOString().split('T')[0];
+          }
+          
+          return {
+            id: user._id || user.id,
+            name: `${user.firstname} ${user.lastname}`,
+            email: user.email,
+            joinDate,
+            status: 'Active'
+          };
+        });
+        setUsers(userData);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching users:', err);
+        setError('Failed to load users. Please try again.');
+        toast.error('Failed to load users');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   const stats = {
     membersCount: users.length,
     trainersCount: trainers.length,
@@ -43,8 +78,8 @@ function AdminDashboard() {
   };
 
   const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleAddTrainer = (e) => {
@@ -171,7 +206,8 @@ function AdminDashboard() {
         </div>
       );
     }
-    if (activeTab === 'members') return <Members />;
+    if (activeTab === 'trainers') return <TrainersManagement />;
+    if (activeTab === 'gym-members') return <GymMembers />;
     if (activeTab === 'payment') return <Payments />;
     if (activeTab === 'trainer') {
       return (
@@ -194,7 +230,17 @@ function AdminDashboard() {
           </h1>
         </div>
 
-        {renderMainContent()}
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600"></div>
+          </div>
+        ) : error ? (
+          <div className="bg-red-100 p-4 rounded-lg text-red-700">
+            {error}
+          </div>
+        ) : (
+          renderMainContent()
+        )}
 
         <AddTrainerModal
           show={showAddTrainer}

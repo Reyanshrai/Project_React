@@ -25,8 +25,8 @@ const AppRoutes = () => {
   const isLoggedIn = !!user;
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/dashboard"];
-  const hideFooterRoutes = ["/dashboard ,/AdminDashboard"];
+  const hideNavbarRoutes = ["/dashboard", "/AdminDashboard"];
+  const hideFooterRoutes = ["/dashboard", "/AdminDashboard"];
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 

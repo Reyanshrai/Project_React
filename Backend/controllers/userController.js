@@ -197,3 +197,30 @@ export const updatePassword = asyncHandler(async (req, res) => {
         }
     }
 });
+
+// Get all users (for admin dashboard)
+export const getAllUsers = asyncHandler(async (req, res) => {
+    try {
+        console.log("🔹 getAllUsers function is executing...");
+        
+        let users = [];
+        
+        if (DB_TYPE === 'mongo') {
+            users = await User.find({}).select('-password');
+        } else if (DB_TYPE === 'postgres') {
+            const { rows } = await pool.query(
+                'SELECT id, firstname, lastname, email, date_of_birth, mobile_number, gender FROM users'
+            );
+            
+            users = rows.map(user => ({
+                ...user,
+                createdAt: new Date().toISOString()
+            }));
+        }
+        
+        res.status(StatusCodes.OK).json({ users });
+    } catch (error) {
+        console.error("🔴 Error in getAllUsers:", error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
+});

@@ -101,3 +101,13 @@ export const adminlogin = asyncHandler(async (req, res) => {
         token,
     });
 });
+
+// Admin Logout Controller
+export const adminLogout = asyncHandler(async (req, res) => {
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0),
+    });
+    
+    res.status(StatusCodes.OK).json({ message: 'Logged out successfully' });
+});
