@@ -1,7 +1,23 @@
 import React from 'react';
-import { Users, LayoutDashboard, Dumbbell, LogOut, Wallet } from 'lucide-react';
+import { Users, LayoutDashboard, Dumbbell, LogOut, Wallet, UserPlus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../config/axios';
+import toast from 'react-hot-toast';
 
 function Sidebar({ activeTab, onTabChange }) {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get('/admins/logout');
+      toast.success('Logged out successfully');
+      navigate('/admin/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error('Logout failed');
+    }
+  };
+
   return (
     <div className="w-64 bg-red-600 text-white p-6">
       <div className="flex items-center gap-2 mb-8">
@@ -23,13 +39,22 @@ function Sidebar({ activeTab, onTabChange }) {
           Dashboard
         </button>
         <button
-          onClick={() => onTabChange('members')}
+          onClick={() => onTabChange('trainers')}
           className={`flex items-center gap-2 text-xl w-full py-2 ${
-            activeTab === 'members' ? 'bg-red-700 rounded-lg px-2' : ''
+            activeTab === 'trainers' ? 'bg-red-700 rounded-lg px-2' : ''
           }`}
         >
-          <Users size={24} />
-          Members
+          <Dumbbell size={24} />
+          Trainers
+        </button>
+        <button
+          onClick={() => onTabChange('gym-members')}
+          className={`flex items-center gap-2 text-xl w-full py-2 ${
+            activeTab === 'gym-members' ? 'bg-red-700 rounded-lg px-2' : ''
+          }`}
+        >
+          <UserPlus size={24} />
+          Gym Members
         </button>
         <button
           onClick={() => onTabChange('payment')}
@@ -50,7 +75,9 @@ function Sidebar({ activeTab, onTabChange }) {
             className="w-24 h-24 rounded-full mb-2"
           />
           <h2 className="text-xl font-bold mb-4">Vivek</h2>
-          <button className="bg-gray-200 text-black px-6 py-2 rounded-full font-semibold flex items-center gap-2">
+          <button 
+            onClick={handleLogout}
+            className="bg-gray-200 text-black px-6 py-2 rounded-full font-semibold flex items-center gap-2">
             <LogOut size={20} />
             Logout
           </button>
