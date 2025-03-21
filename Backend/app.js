@@ -9,6 +9,9 @@ import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import memberRoutes from './routes/memberRoutes.js'
 import trainerRoutes from './routes/trainerRoutes.js'
+import subscriptionRoutes from './routes/subscriptionRoutes.js'
+import dietPlanRoutes from './routes/dietPlanRoutes.js'
+import classRoutes from './routes/classRoutes.js'
 
 
 // Load environment variables first
@@ -42,6 +45,9 @@ app.use('/users',userRoutes)
 app.use('/admins',adminRoutes)
 app.use('/members',memberRoutes)
 app.use('/trainers',trainerRoutes)
+app.use('/api/subscriptions',subscriptionRoutes)
+app.use('/api/diet-plans',dietPlanRoutes)
+app.use('/api/classes',classRoutes)
 
 
 export default app;

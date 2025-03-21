@@ -224,3 +224,180 @@ export const getAllUsers = asyncHandler(async (req, res) => {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
 });
+
+// Get User Profile by ID (for dashboard)
+export const getUserProfileById = asyncHandler(async (req, res) => {
+    try {
+        console.log("🔹 getUserProfileById function is executing...");
+        const userId = req.params.id;
+        
+        if (!userId) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ error: 'User ID is required' });
+        }
+        
+        let user;
+        
+        if (DB_TYPE === 'mongo') {
+            user = await User.findById(userId);
+            
+            if (!user) {
+                return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+            }
+            
+            // Add mock fitness data for now - in a real app, this would be fetched from the database
+            const userData = {
+                _id: user._id,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                email: user.email,
+                dateOfBirth: user.dateOfBirth,
+                mobileNumber: user.mobileNumber,
+                gender: user.gender,
+                // Fitness data
+                weight: user.weight || 70,
+                stats: {
+                    dailySteps: user.dailySteps || 8500,
+                    caloriesBurned: user.caloriesBurned || 450,
+                    heartRate: user.heartRate || 72
+                },
+                workout: {
+                    name: user.workoutName || "Upper Body Strength",
+                    duration: user.workoutDuration || 45
+                },
+                progress: {
+                    weeklyWorkouts: user.weeklyWorkouts || 3
+                },
+                subscription: {
+                    active: user.subscriptionActive || true,
+                    planName: user.subscriptionPlan || "Basic Fitness",
+                    expiresAt: user.subscriptionExpiry || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                    features: user.subscriptionFeatures || ["Gym Access", "2 Group Classes/week", "Locker Access"]
+                },
+                dietPlan: {
+                    active: user.dietActive || false,
+                    planName: user.dietPlan || "",
+                    description: user.dietDescription || ""
+                }
+            };
+            
+            return res.status(StatusCodes.OK).json(userData);
+        } else {
+            // PostgreSQL logic
+            const client = await pool.connect();
+            try {
+                const userResult = await client.query(
+                    'SELECT id, firstname, lastname, email, date_of_birth, mobile_number, gender FROM users WHERE id = $1',
+                    [userId]
+                );
+                
+                if (!userResult.rows.length) {
+                    return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+                }
+                
+                user = userResult.rows[0];
+                
+                // Add mock fitness data
+                const userData = {
+                    ...user,
+                    weight: 70,
+                    stats: {
+                        dailySteps: 8500,
+                        caloriesBurned: 450,
+                        heartRate: 72
+                    },
+                    workout: {
+                        name: "Upper Body Strength",
+                        duration: 45
+                    },
+                    progress: {
+                        weeklyWorkouts: 3
+                    },
+                    subscription: {
+                        active: true,
+                        planName: "Basic Fitness",
+                        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                        features: ["Gym Access", "2 Group Classes/week", "Locker Access"]
+                    },
+                    dietPlan: {
+                        active: false,
+                        planName: "",
+                        description: ""
+                    }
+                };
+                
+                return res.status(StatusCodes.OK).json(userData);
+            } catch (error) {
+                console.error("🔴 Error in getUserProfileById PostgreSQL:", error);
+                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Database error' });
+            } finally {
+                client.release();
+            }
+        }
+    } catch (error) {
+        console.error("🔴 Error in getUserProfileById:", error);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
+});
+
+// Update User Weight
+export const updateUserWeight = asyncHandler(async (req, res) => {
+    try {
+        console.log("🔹 updateUserWeight function is executing...");
+        const userId = req.params.id;
+        const { weight } = req.body;
+        
+        if (!userId || !weight) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ error: 'User ID and weight are required' });
+        }
+        
+        if (DB_TYPE === 'mongo') {
+            const user = await User.findByIdAndUpdate(
+                userId,
+                { weight },
+                { new: true }
+            );
+            
+            if (!user) {
+                return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+            }
+            
+            return res.status(StatusCodes.OK).json({ message: 'Weight updated successfully', weight });
+        } else {
+            // PostgreSQL logic
+            const client = await pool.connect();
+            try {
+                // Check if the weight column exists, if not add it
+                const checkColumn = await client.query(`
+                    SELECT column_name FROM information_schema.columns 
+                    WHERE table_name = 'users' AND column_name = 'weight'
+                `);
+                
+                if (checkColumn.rows.length === 0) {
+                    await client.query(`ALTER TABLE users ADD COLUMN weight NUMERIC`);
+                }
+                
+                const result = await client.query(
+                    'UPDATE users SET weight = $1 WHERE id = $2 RETURNING id, weight',
+                    [weight, userId]
+                );
+                
+                if (!result.rows.length) {
+                    return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+                }
+                
+                return res.status(StatusCodes.OK).json({ 
+                    message: 'Weight updated successfully', 
+                    weight: result.rows[0].weight 
+                });
+            } catch (error) {
+                console.error("🔴 Error in updateUserWeight PostgreSQL:", error);
+                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Database error' });
+            } finally {
+                client.release();
+            }
+        }
+    } catch (error) {
+        console.error("🔴 Error in updateUserWeight:", error);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
+});
