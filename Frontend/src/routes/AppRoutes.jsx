@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
 import { Navbar, Footer } from "../components";
 import {
@@ -18,13 +18,7 @@ import {
 } from "../pages";
 
 import ProtectedRoute from "./ProtectedRoute";
-import {
-  AdminDashboard,
-  AdminLogin,
-  Payments,
-  GymMembers,
-  TrainersManagement,
-} from "../pages/Admin";
+import {AdminDashboard, AdminLogin, Payments, GymMembers, TrainersManagement} from "../pages/Admin"
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -54,9 +48,7 @@ const AppRoutes = () => {
         />
         <Route
           path="/admin/login"
-          element={
-            isLoggedIn ? <Navigate to="/admin-dashboard" /> : <AdminLogin />
-          }
+          element={isLoggedIn ? <Navigate to="/admin-dashboard" /> : <AdminLogin/>}
         />
         <Route
           path="/register"
@@ -73,11 +65,7 @@ const AppRoutes = () => {
         />
         <Route
           path="/admin-dashboard"
-          element={
-            <ProtectedRoute isAuthenticated={isLoggedIn}>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
+          element={<AdminDashboard/>}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -7,23 +7,31 @@ import axios from "../../config/axios";
 function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    axios.post("/admins/login",{
-      email: email,
-      password: password,
-    }).then(()=>{
-      // onLogin(email, password);
+    try {
+      const response = await axios.post("/admins/login", {
+        email: email,
+        password: password,
+      });
+      
+      // Store admin token and data
+      localStorage.setItem("admin_token", response.data.token);
+      localStorage.setItem("admin_data", JSON.stringify(response.data));
+      
       toast.success('Welcome back, Admin!');
       navigate('/admin-dashboard');
-    }).catch((err)=>{
+    } catch (err) {
       console.log(err.response?.data);
       toast.error(err.response?.data?.message || "Invalid Email or Password");
-    })
-    
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,8 +85,9 @@ function AdminLogin() {
           <button
             type="submit"
             className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200"
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
         
