@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import Sidebar from '../../components/AdminSidebar';
-import {GymMembers,TrainersManagement,Payments} from './index';
-import AddTrainerModal from '../../components/AddTrainerModal';
-import { Users, LayoutDashboard, Pencil, Trash2, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/admin/AdminSidebar';
+import {GymMembers, TrainersManagement, Payments, SubscriptionManagement, DietPlanManagement, ClassManagement} from '../components/admin/index';
+import AddTrainerModal from '../components/AddTrainerModal';
+import { Users, LayoutDashboard, Pencil, Trash2, Search, CreditCard, Apple, Calendar } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from '../../config/axios';
+import axios from '../config/axios';
 
-// Initial mock data
+// Initial mock data if API fails
 const initialTrainers = [
   { id: 1, fullName: 'John Smith', position: 'Senior Trainer', phoneNo: '1234567890', timeToWork: '9 AM to 5 PM' },
   { id: 2, fullName: 'Sarah Johnson', position: 'Yoga Instructor', phoneNo: '2345678901', timeToWork: '10 AM to 6 PM' },
@@ -14,6 +15,7 @@ const initialTrainers = [
 ];
 
 function AdminDashboard() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showAddTrainer, setShowAddTrainer] = useState(false);
   const [trainers, setTrainers] = useState(initialTrainers);
@@ -29,6 +31,15 @@ function AdminDashboard() {
     timeToWork: ''
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Check admin authentication
+  useEffect(() => {
+    const adminToken = localStorage.getItem('admin_token');
+    if (!adminToken) {
+      toast.error('Please login as admin');
+      navigate('/admin/login');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -65,8 +76,6 @@ function AdminDashboard() {
       }
     };
 
-    fetchUsers();
-
     const fetchTrainers = async () => {
       try {
         const response = await axios.get('/trainers');
@@ -84,10 +93,14 @@ function AdminDashboard() {
       } catch (err) {
         console.error('Error fetching trainers:', err);
         toast.error('Failed to load trainers');
+        // Keep the initial trainers data as fallback
       }
     };
 
-    fetchTrainers();
+    if (localStorage.getItem('admin_token')) {
+      fetchUsers();
+      fetchTrainers();
+    }
   }, []);
 
   const stats = {
@@ -232,139 +245,84 @@ function AdminDashboard() {
           </div>
         </div>
       );
+    } else if (activeTab === 'members') {
+      return <GymMembers />;
+    } else if (activeTab === 'trainers') {
+      return <TrainersManagement />;
+    } else if (activeTab === 'payments') {
+      return <Payments />;
+    } else if (activeTab === 'subscriptions') {
+      return <SubscriptionManagement />;
+    } else if (activeTab === 'diet-plans') {
+      return <DietPlanManagement />;
+    } else if (activeTab === 'classes') {
+      return <ClassManagement />;
     }
-    if (activeTab === 'trainers') return <TrainersManagement />;
-    if (activeTab === 'gym-members') return <GymMembers />;
-    if (activeTab === 'payment') return <Payments />;
-    if (activeTab === 'trainer') {
-      return (
-        <Trainers
-          trainers={trainers}
-          onAddTrainer={() => setShowAddTrainer(true)}
-        />
-      );
-    }
+    return null;
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
-      {/* Mobile menu button */}
-      <div className="md:hidden fixed top-0 left-0 z-50 p-4">
-        <button 
-          onClick={toggleSidebar}
-          className="p-2 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none"
-          aria-label="Toggle sidebar menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-      
-      {/* Sidebar with responsive behavior */}
-      <div className={`${sidebarOpen ? 'block' : 'hidden'} md:block fixed inset-0 z-40 md:relative md:inset-auto`}>
-        {/* Overlay for mobile */}
+    <div className="flex min-h-screen bg-gray-100">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
         <div 
-          className="md:hidden fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden" 
           onClick={toggleSidebar}
+          aria-hidden="true"
         ></div>
-        
-        {/* Actual sidebar */}
-        <div className="fixed md:relative h-full w-64 max-w-[80%] z-50 md:z-auto shadow-lg">
-          <Sidebar 
-            activeTab={activeTab} 
-            onTabChange={(tab) => {
-              setActiveTab(tab);
-              setSidebarOpen(false);
-            }}
-          />
-        </div>
-      </div>
+      )}
       
-      <div className="flex-1 p-4 sm:p-6 md:p-8 mt-12 md:mt-0">
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl font-bold">
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </h1>
-        </div>
+      {/* Sidebar */}
+      <Sidebar 
+        isOpen={sidebarOpen} 
+        toggleSidebar={toggleSidebar}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        menuItems={[
+          { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
+          { id: 'members', label: 'Members', icon: <Users size={20} /> },
+          { id: 'trainers', label: 'Trainers', icon: <Users size={20} /> },
+          { id: 'payments', label: 'Payments', icon: <CreditCard size={20} /> },
+          { id: 'subscriptions', label: 'Subscriptions', icon: <CreditCard size={20} /> },
+          { id: 'diet-plans', label: 'Diet Plans', icon: <Apple size={20} /> },
+          { id: 'classes', label: 'Classes', icon: <Calendar size={20} /> }
+        ]}
+      />
 
-        {loading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600"></div>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="bg-white p-4 shadow flex justify-between items-center">
+          <button 
+            className="block md:hidden rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            onClick={toggleSidebar}
+            aria-label="Open menu"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              className="h-6 w-6"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M4 6h16M4 12h16M4 18h16" 
+              />
+            </svg>
+          </button>
+          <h1 className="text-xl font-semibold">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h1>
+          <div className="flex items-center">
+            <span className="mr-2">Welcome, Admin</span>
           </div>
-        ) : error ? (
-          <div className="bg-red-100 p-4 rounded-lg text-red-700">
-            {error}
-          </div>
-        ) : (
-          renderMainContent()
-        )}
-
-        <AddTrainerModal
-          show={showAddTrainer}
-          onClose={() => setShowAddTrainer(false)}
-          onSubmit={handleAddTrainer}
-          trainer={newTrainer}
-          onTrainerChange={handleTrainerChange}
-        />
-
-        {/* Edit User Modal */}
-        {editingUser && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white p-4 sm:p-6 rounded-lg w-full max-w-md">
-              <h2 className="text-xl font-bold mb-4">Edit User</h2>
-              <form onSubmit={handleUpdate} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    value={editingUser.name}
-                    onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    value={editingUser.email}
-                    onChange={(e) => setEditingUser({ ...editingUser, email: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Status</label>
-                  <select
-                    value={editingUser.status}
-                    onChange={(e) => setEditingUser({ ...editingUser, status: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
-                    required
-                  >
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                  </select>
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setEditingUser(null)}
-                    className="px-4 py-2 text-gray-700 hover:text-gray-900"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-                  >
-                    Update
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
+        </header>
+        
+        {/* Main */}
+        <main className="flex-1 p-4 md:p-6 overflow-auto">
+          {renderMainContent()}
+        </main>
       </div>
     </div>
   );
