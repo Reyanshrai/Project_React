@@ -66,6 +66,28 @@ function AdminDashboard() {
     };
 
     fetchUsers();
+
+    const fetchTrainers = async () => {
+      try {
+        const response = await axios.get('/trainers');
+        if (response.data && response.data.trainers) {
+          const trainerData = response.data.trainers.map(trainer => ({
+            id: trainer._id,
+            fullName: trainer.fullName,
+            email: trainer.email,
+            phoneNo: trainer.phoneNumber,
+            position: trainer.specialization,
+            timeToWork: trainer.workingHours
+          }));
+          setTrainers(trainerData);
+        }
+      } catch (err) {
+        console.error('Error fetching trainers:', err);
+        toast.error('Failed to load trainers');
+      }
+    };
+
+    fetchTrainers();
   }, []);
 
   const stats = {
@@ -231,6 +253,7 @@ function AdminDashboard() {
         <button 
           onClick={toggleSidebar}
           className="p-2 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none"
+          aria-label="Toggle sidebar menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -239,24 +262,22 @@ function AdminDashboard() {
       </div>
       
       {/* Sidebar with responsive behavior */}
-      <div className={`${sidebarOpen ? 'block' : 'hidden'} md:block md:relative fixed inset-0 z-40`}>
-        <div className="md:relative md:w-auto">
-          {/* Overlay for mobile */}
-          <div 
-            className="md:hidden fixed inset-0 bg-black bg-opacity-50"
-            onClick={toggleSidebar}
-          ></div>
-          
-          {/* Actual sidebar */}
-          <div className="md:relative w-64 h-full md:h-screen bg-white shadow-lg">
-            <Sidebar 
-              activeTab={activeTab} 
-              onTabChange={(tab) => {
-                setActiveTab(tab);
-                setSidebarOpen(false);
-              }}
-            />
-          </div>
+      <div className={`${sidebarOpen ? 'block' : 'hidden'} md:block fixed inset-0 z-40 md:relative md:inset-auto`}>
+        {/* Overlay for mobile */}
+        <div 
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50"
+          onClick={toggleSidebar}
+        ></div>
+        
+        {/* Actual sidebar */}
+        <div className="fixed md:relative h-full w-64 max-w-[80%] z-50 md:z-auto shadow-lg">
+          <Sidebar 
+            activeTab={activeTab} 
+            onTabChange={(tab) => {
+              setActiveTab(tab);
+              setSidebarOpen(false);
+            }}
+          />
         </div>
       </div>
       
