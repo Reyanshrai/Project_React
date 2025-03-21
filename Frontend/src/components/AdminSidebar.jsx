@@ -19,7 +19,7 @@ function Sidebar({ activeTab, onTabChange }) {
   };
 
   return (
-    <div className="w-64 bg-red-600 text-white p-6">
+    <div className="w-64 bg-red-600 text-white p-6 h-full overflow-y-auto">
       <div className="flex items-center gap-2 mb-8">
         <Dumbbell size={32} />
         <div>
