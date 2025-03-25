@@ -18,7 +18,7 @@ import {
 } from "../pages";
 
 import ProtectedRoute from "./ProtectedRoute";
-import {AdminDashboard, AdminLogin, Payments, GymMembers, TrainersManagement} from "../pages/Admin"
+import {AdminDashboard, AdminLogin, Payments, GymMembers, TrainersManagement} from "../components/admin"
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
