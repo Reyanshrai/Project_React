@@ -208,13 +208,13 @@ const Dashboard = () => {
                     onLogout={handleLogout} 
                 />
 
-                <StatsGrid 
+                {/* <StatsGrid 
                     steps={userData.stats?.dailySteps || 0}
                     calories={userData.stats?.caloriesBurned || 0}
                     heartRate={userData.stats?.heartRate || 0}
-                />
+                /> */}
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     <TodaysWorkout 
                         workoutName={userData.workout?.name || "No workout scheduled"} 
                         duration={userData.workout?.duration || 0} 
@@ -222,7 +222,7 @@ const Dashboard = () => {
                     <WeeklyProgress 
                         progress={userData.progress?.weeklyWorkouts || 0} 
                     />
-                </div>
+                </div> */}
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     <WeightTracking 
