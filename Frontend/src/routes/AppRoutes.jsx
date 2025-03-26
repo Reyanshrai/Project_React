@@ -18,28 +18,7 @@ import {
 } from "../pages";
 
 import ProtectedRoute from "./ProtectedRoute";
-import {AdminDashboard, AdminLogin, Payments, GymMembers, TrainersManagement} from "../components/admin";
-
-const AdminProtectedRoute = ({ children }) => {
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-    const adminToken = localStorage.getItem("admin_token");
-    setIsAdminAuthenticated(!!adminToken);
-    setIsLoading(false);
-  }, []);
-  
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  
-  if (!isAdminAuthenticated) {
-    return <Navigate to="/admin/login" />;
-  }
-  
-  return children;
-};
+import {AdminDashboard, AdminLogin, Payments, GymMembers, TrainersManagement} from "../components/admin"
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -62,14 +41,14 @@ const AppRoutes = () => {
         <Route path="/trainer" element={<Trainer />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
-        
+
         <Route
           path="/login"
           element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />}
         />
         <Route
           path="/admin/login"
-          element={<AdminLogin/>}
+          element={isLoggedIn ? <Navigate to="/admin-dashboard" /> : <AdminLogin/>}
         />
         <Route
           path="/register"
@@ -86,11 +65,7 @@ const AppRoutes = () => {
         />
         <Route
           path="/admin-dashboard"
-          element={
-            <AdminProtectedRoute>
-              <AdminDashboard/>
-            </AdminProtectedRoute>
-          }
+          element={<AdminDashboard/>}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
