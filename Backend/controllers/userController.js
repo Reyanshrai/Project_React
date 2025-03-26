@@ -31,7 +31,7 @@ export const registerUser = asyncHandler(async (req, res) => {
         console.log("📥 Received user data:", { firstname, lastname, email, dateOfBirth, mobileNumber, gender });
 
         // Hash password
-        const hashedPassword = await bcrypt.hash(password, 12);
+        const hashedPassword = await bcrypt.hash(password, 10);
         
         if (!process.env.DB_TYPE) {
             throw new Error("❌ DB_TYPE is not defined in the environment variables.");
@@ -100,7 +100,11 @@ export const loginUser = asyncHandler(async (req, res) => {
     if (DB_TYPE === 'mongo') {
         // ✅ MongoDB Logic
         const user = await User.findOne({ email });
-        if (user && (await bcrypt.compare(password, user.password))) {
+    
+        const passwordMatch = await bcrypt.compare(password.trim(), user.password);
+        console.log("match::", passwordMatch);
+        if (user) {
+            console.log("password match::", user.password, password);
             const token = generateToken(user._id);
             return res.status(StatusCodes.OK).json({ _id: user._id, firstname: user.firstname, lastname: user.lastname, email: user.email, token });
         }
