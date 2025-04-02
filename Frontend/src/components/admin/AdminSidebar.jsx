@@ -68,12 +68,12 @@ function Sidebar({ isOpen, toggleSidebar, activeTab, setActiveTab, menuItems }) 
 
       <div className="mt-auto pt-8">
         <div className="flex flex-col items-center">
-          <img
+          {/* <img
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop&crop=faces"
             alt="Profile"
             className="w-24 h-24 rounded-full mb-2"
           />
-          <h2 className="text-xl font-bold mb-4">Vivek</h2>
+          <h2 className="text-xl font-bold mb-4">Vivek</h2> */}
           <button 
             onClick={handleLogout}
             className="bg-gray-200 text-black px-6 py-2 rounded-full font-semibold flex items-center gap-2 hover:bg-gray-300 transition-colors duration-200">
