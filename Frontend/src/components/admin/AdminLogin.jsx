@@ -90,10 +90,6 @@ function AdminLogin() {
             {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
-        
-        <p className="mt-4 text-sm text-center text-gray-600">
-          Demo credentials: admin@gym.com / admin123
-        </p>
       </div>
     </div>
   );
