@@ -102,9 +102,9 @@ export const loginUser = asyncHandler(async (req, res) => {
         const user = await User.findOne({ email });
     
         const passwordMatch = await bcrypt.compare(password.trim(), user.password);
-        console.log("match::", passwordMatch);
+        // console.log("match::", passwordMatch);
         if (user) {
-            console.log("password match::", user.password, password);
+            // console.log("password match::", user.password, password);
             const token = generateToken(user._id);
             return res.status(StatusCodes.OK).json({ _id: user._id, firstname: user.firstname, lastname: user.lastname, email: user.email, token });
         }
