@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {body}  from "express-validator";
-import { registerUser, loginUser, logoutUser, getUserProfile, updatePassword, getAllUsers, updateUserWeight, getUserProfileById } from "../controllers/userController.js";
+import { registerUser, loginUser, logoutUser, getUserProfile, updatePassword, getAllUsers, getUserProfileById, updateUserWeight } from "../controllers/userController.js";
 import {validateRegister,validateLogin} from '../validators/userValidation.js'
 import { protect } from "../middleware/authMiddleware.js";
 
