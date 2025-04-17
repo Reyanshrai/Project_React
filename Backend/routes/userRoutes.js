@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {body}  from "express-validator";
-import { registerUser, loginUser, logoutUser, getUserProfile, updatePassword, getAllUsers, getUserProfileById, updateUserWeight } from "../controllers/userController.js";
+import { registerUser, loginUser, logoutUser, getUserProfile, updatePassword, getAllUsers, getUserProfileById, updateUserWeight, forgotPassword, resetPassword } from "../controllers/userController.js";
 import {validateRegister,validateLogin} from '../validators/userValidation.js'
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -14,5 +14,9 @@ router.get("/profile/:id", getUserProfileById);
 router.put("/password", protect, updatePassword);
 router.get("/all", getAllUsers);
 router.patch("/:id/weight", protect, updateUserWeight);
+
+// Password reset routes
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
 
 export default router

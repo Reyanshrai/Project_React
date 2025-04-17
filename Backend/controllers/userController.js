@@ -5,6 +5,7 @@ import { validationResult } from 'express-validator';
 import { StatusCodes } from 'http-status-codes';
 import User from '../models/userModel.js'; // MongoDB Model
 import 'dotenv/config';
+import crypto from 'crypto';
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -67,6 +68,110 @@ export const loginUser = asyncHandler(async (req, res) => {
 export const logoutUser = asyncHandler(async (req, res) => {
     res.clearCookie('jwt');
     res.status(StatusCodes.OK).json({ message: 'Logged out successfully' });
+});
+
+// Forgot Password - Step 1: Request a reset token
+export const forgotPassword = asyncHandler(async (req, res) => {
+    try {
+        console.log("🔹 forgotPassword function is executing...");
+        const { email } = req.body;
+        
+        if (!email) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ 
+                error: 'Please provide your email address' 
+            });
+        }
+        
+        // Find user with this email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(StatusCodes.NOT_FOUND).json({ 
+                error: 'No user found with this email address' 
+            });
+        }
+        
+        // Generate reset token (would typically be sent via email)
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        
+        // Hash token and store in database
+        user.passwordResetToken = crypto
+            .createHash('sha256')
+            .update(resetToken)
+            .digest('hex');
+        
+        // Set expiry to 10 minutes from now
+        user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+        
+        // Save the user with reset token info
+        await user.save();
+        
+        // In a real app, you would send an email with the reset link
+        // For this demo, we'll just return the token in the response
+        console.log(`✅ Password reset token generated for ${email}: ${resetToken}`);
+        
+        return res.status(StatusCodes.OK).json({
+            message: 'Password reset token generated successfully',
+            resetToken
+        });
+    } catch (error) {
+        console.error("🔴 Error in forgotPassword:", error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
+});
+
+// Reset Password - Step 2: Verify token and set new password
+export const resetPassword = asyncHandler(async (req, res) => {
+    try {
+        console.log("🔹 resetPassword function is executing...");
+        const { token, password, confirmPassword } = req.body;
+        
+        if (!token || !password || !confirmPassword) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ 
+                error: 'Please provide all required fields' 
+            });
+        }
+        
+        if (password !== confirmPassword) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ 
+                error: 'Passwords do not match' 
+            });
+        }
+        
+        // Hash the token to compare with what's stored in the database
+        const hashedToken = crypto
+            .createHash('sha256')
+            .update(token)
+            .digest('hex');
+        
+        // Find user with this token that hasn't expired
+        const user = await User.findOne({
+            passwordResetToken: hashedToken,
+            passwordResetExpires: { $gt: Date.now() }
+        });
+        
+        if (!user) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ 
+                error: 'Token is invalid or has expired' 
+            });
+        }
+        
+        // Set new password
+        user.password = password;
+        user.passwordResetToken = null;
+        user.passwordResetExpires = null;
+        
+        // Save user with new password (will be hashed by pre-save hook)
+        await user.save();
+        
+        console.log(`✅ Password reset successful for user: ${user.email}`);
+        
+        return res.status(StatusCodes.OK).json({
+            message: 'Password has been reset successfully'
+        });
+    } catch (error) {
+        console.error("🔴 Error in resetPassword:", error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
 });
 
 // Get User Profile
